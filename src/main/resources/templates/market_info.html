@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="common/head"></head>
+<body>
+	<nav class="navbar navbar-inverse" th:replace="common/nav"></nav>
+	
+	<div class="market_detail_sidebar" th:replace="market_detail/sidebar"></div>
+	
+	<div style="text-align:center;">
+		<h1>전통시장 지도</h1>
+		<div id="map" style="width:1000px;height:900px;"></div>
+		
+		<ul style="text-align: center;">
+			<li>
+				<a href="market_detail?market=gukje">국제시장</a>
+			</li>
+			<li>
+				<a href="market_detail?market=busanjin">부산진시장</a>
+			</li>
+			<li>
+				<a href="market_detail?market=boojun">부전마켓타운</a>
+			</li>
+			<li>
+				<a href="market_detail?market=gupo">구포시장</a>
+			</li>
+			<li>
+				<a href="market_detail?market=bupyeongkkangtong">부평깡통시장</a>
+			</li>
+		</ul>
+	</div>
+	<footer class="container-fluid text-center" th:replace="common/footer"></footer>
+	
+	<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=da146a2a6ff6a54903c1d2a7caecd1c7"></script>
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=da146a2a6ff6a54903c1d2a7caecd1c7&libraries=services"></script>
+	<script>
+		var container = document.getElementById('map');
+		var options = {
+			center : new kakao.maps.LatLng(35.15879291470575, 129.04505519101724),
+			level : 7
+		};
+		var map = new kakao.maps.Map(container, options);
+		
+		var positions = [
+			{
+				title: '국제시장',
+				latlng: new kakao.maps.LatLng(35.10111802444522, 129.02808158205954),
+				url: 'market_detail?market=gukje'
+			},
+			{
+				title: '부산진시장',
+				latlng: new kakao.maps.LatLng(35.13672877672118, 129.05901214387575),
+				url: 'market_detail?market=busanjin'
+			},
+			{
+				title: '부전마켓타운',
+				latlng: new kakao.maps.LatLng(35.162769461733696, 129.06130357272224),
+				url: 'market_detail?market=boojun'
+			},
+			{
+				title: '구포시장',
+				latlng: new kakao.maps.LatLng(35.209261060071114, 129.00356512805195),
+				url: 'market_detail?market=gupo'
+			},
+			{
+				title: '부평깡통시장',
+				latlng: new kakao.maps.LatLng(35.10209731168853, 129.02583596322543),
+				url: 'market_detail?market=bupyeongkkangtong'
+			}
+		];
+		
+		var imageSrc = '/images/marker.png';
+		for (var i = 0; i < positions.length; i ++) {
+	    
+		    // 마커 이미지의 이미지 크기 입니다
+		    var imageSize = new kakao.maps.Size(64, 69); 
+		    
+		    // 마커 이미지를 생성합니다    
+		    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
+		    
+		    // 마커를 생성합니다
+		    var marker = new kakao.maps.Marker({
+		        map: map, // 마커를 표시할 지도
+		        position: positions[i].latlng, // 마커를 표시할 위치
+		        title : positions[i].title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+		        image : markerImage // 마커 이미지 
+		    });
+		    var infowindow = new kakao.maps.InfoWindow({
+        		content: positions[i].title // 인포윈도우에 표시할 내용
+    		});
+    		
+		    kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+		    kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+		    kakao.maps.event.addListener(marker, 'click', makeClickListener(positions, i));
+	    }
+		function makeOverListener(map, marker, infowindow) {
+		    return function() {
+		        infowindow.open(map, marker);
+		    };
+		}
+		
+		function makeOutListener(infowindow) {
+		    return function() {
+		        infowindow.close();
+		    };
+		}
+	    
+	    function makeClickListener(positions, i){
+			return function(){
+				window.location.href = positions[i].url;
+			};
+		}
+	</script>
+</body>
+</html>

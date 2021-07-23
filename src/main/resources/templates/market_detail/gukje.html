@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="common/head"></head>
+
+<body>
+	<header th:replace="common/header"></header>
+	
+	<nav class="navbar navbar-inverse" th:replace="common/nav"></nav>
+	<div style="width: 100%;height:100%;">
+		<div class="market_detail_sidebar" th:replace="market_detail/sidebar"></div>
+		
+		<div style="float:left;width:70%;height:100%;margin:20px;">
+			<h1>국제시장</h1>
+			
+			<ul class="nav nav-tabs" id="myTab" role="tablist">
+				<li class="nav-item" role="presentation">
+					<button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">소개</button>
+				</li>
+				<li class="nav-item" role="presentation">
+					<button class="nav-link" id="store_list-tab" data-bs-toggle="tab" data-bs-target="#store_list" type="button" role="tab" aria-controls="store_list" aria-selected="false">점포목록</button>
+				</li>
+				<li class="nav-item" role="presentation">
+					<button class="nav-link" id="product_list-tab" data-bs-toggle="tab" data-bs-target="#product_list" type="button" role="tab" aria-controls="product_list" aria-selected="false">품목목록</button>
+				</li>
+				<li class="nav-item" role="presentation">
+					<button class="nav-link" id="direction-tab" data-bs-toggle="tab" data-bs-target="#direction" type="button" role="tab" aria-controls="direction" aria-selected="false">오시는길</button>
+				</li>
+			</ul>
+			<div class="tab-content" id="myTabContent">
+				<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+					<br><h2><strong>소개</strong></h2><hr><br><br>
+					"사람과 시장을, 부산과 세계를 잇는 국제시장" 이름만 들어도 모두가 다 아는 부산 국제시장.<br>
+					흥남부두에서 국제시장까지의 고단하고 치열한 인생여정을 그린 영화 「국제시장」에 등장하는 온 삶의 질곡과 희망을 담은 꽃분이네처럼<br>
+					지금도 많은 이들의 삶의 현장입니다.<br>
+					국제시장은 2015년, 글로벌 명품시장 육성사업에 선정이 되어 '국제시장'을 즐기고, 쇼핑하고, 관광할 수 있는 전통시장으로 성장하기 위해<br>
+					한국적 문화와 연계된 볼거리, 살거리, 즐길거리를 개발하고 글로벌 홍보를 통한<br>
+					세계 관광명소화, 글로벌 수준의 편리한 쇼핑환경을 조성하는데 총력을 다하고 있습니다.<br>
+					또한 만물의거리, 아리랑거리, 젊음의거리, 부평깡통시장, 자갈치시장, 광복동패션거리 등과 함께<br>
+					다양한 볼거리도 겸비한 최고의 관광지이자 쇼핑 공간입니다.<br><br><br>
+					<hr><br><br>
+					<h3 style="text-align:center;"><strong>"사람과 시장, 부산과 세계를 잇는 시장"</strong></h3><br><br>
+					<hr><br>
+					부산 중구, 부산의 중심지에 위치한 국제시장은 부산의 대표적인 전통시장이다.<br>
+					1945년 광복 이후 일본인들이 남긴 물건과 해외동포들이 가져온 물건들을 거래하기 위해<br>
+					현재의 자리를 장터로 삼으며 국제시장의 역사는 시작된다.<br>
+					많은 사람들로 시끌벅적했던 이 공터는 처음엔 도떼기시장이라 불리다가 1948년에 건물을 세우고 자유시장으로,<br>
+					<p>1950년 미군 부대에서 흘러나온 물건까지 취급하게 되면서 국제시장이라는 이름을 갖추게 되었다.</p>
+					<p><img src="/images/gukje_home1.jpeg" width="600"></p><br>
+					그렇게 50년대부터 90년대까지 해외양품, 미군부대 군수물자, 수입 밀수품, 전자제품 등<br>
+					여러 가지 상품판매로 호황을 누렸고 5차례의 크고 작은 화재를 겪기도 했으나<br>
+					그때마다 국제시장은 강인한 생명력으로 그 자리를 지키며 새롭게 거듭났다.<br>
+					태어난 순간부터 한 생을 살아가는 동안의 필요한 모든 것이 다 있었다던 곳.<br>
+					어느덧 70여년, 오늘날 먹자골목과 아리랑거리, 젊음의 거리, 구제골목과 함께<br>
+					부산의 관광 상품으로 자리한 이곳은 한국 근현대사의 숱한 사연을 고스란히 담고 있는 부산의 국제시장이다.<br><br><br>
+				</div>
+				<div class="tab-pane fade" id="store_list" role="tabpanel" aria-labelledby="store_list-tab">
+					<br><h2><strong>점포목록</strong></h2><br>
+					<ul class="list-group list-group-horizontal-xxl">
+						<li class="list-group-item">BB샵</li>
+						<li class="list-group-item">JINNYCHO</li>
+						<li class="list-group-item">N구제</li>
+						<li class="list-group-item">광명아케이트</li>
+						<li class="list-group-item">광성 LED 조명</li>
+						<li class="list-group-item">광성엘이디</li>
+						<li class="list-group-item">국제란제리</li>
+						<li class="list-group-item">국제문구상사</li>
+						<li class="list-group-item">국제유니폼</li>
+					</ul>
+					<ul class="list-group list-group-horizontal-xxl">
+						<li class="list-group-item">근대흑백사진관 그리다</li>
+						<li class="list-group-item">금성칠기공예</li>
+						<li class="list-group-item">기모상회</li>
+						<li class="list-group-item">기프트샵 기분</li>
+						<li class="list-group-item">김지영한복</li>
+						<li class="list-group-item">꾸밈방 홈패브릭</li>
+						<li class="list-group-item">나애가운</li>
+						<li class="list-group-item">뉘앙스</li>
+					</ul>
+					<ul class="list-group list-group-horizontal-xxl">
+						<li class="list-group-item">달팽이한지공예</li>
+						<li class="list-group-item">대진주단</li>
+						<li class="list-group-item">대흥양산</li>
+						<li class="list-group-item">동민상회</li>
+						<li class="list-group-item">동주은방 by올미</li>
+						<li class="list-group-item">랜드마크프로젝트</li>
+						<li class="list-group-item">로뎀나무</li>
+						<li class="list-group-item">마코앤보</li>
+						<li class="list-group-item">메종드쨈</li>
+					</ul>
+					<ul class="list-group list-group-horizontal-xxl">
+						<li class="list-group-item">문화상회</li>
+						<li class="list-group-item">문화수예 이불</li>
+						<li class="list-group-item">미경사</li>
+						<li class="list-group-item">미성사</li>
+						<li class="list-group-item">민쥬얼리</li>
+						<li class="list-group-item">바이삼삼</li>
+						<li class="list-group-item">부민주단</li>
+						<li class="list-group-item">부산상회</li>
+						<li class="list-group-item">부산수예</li>
+						<li class="list-group-item">비단길 한복</li>
+					</ul>
+					<ul class="list-group list-group-horizontal-xxl">
+						<li class="list-group-item">삼성도기</li>
+						<li class="list-group-item">서울상사</li>
+						<li class="list-group-item">성원가방</li>
+						<li class="list-group-item">세사리빙</li>
+						<li class="list-group-item">세운장식</li>
+						<li class="list-group-item">순면사</li>
+						<li class="list-group-item">신광주단</li>
+						<li class="list-group-item">씨엘라인</li>
+						<li class="list-group-item">아름다운집</li>
+					</ul>
+					<ul class="list-group list-group-horizontal-xxl">
+						<li class="list-group-item">아이디어스토어</li>
+						<li class="list-group-item">아이하시</li>
+						<li class="list-group-item"></li>
+						<li class="list-group-item"></li>
+						<li class="list-group-item"></li>
+						<li class="list-group-item"></li>
+						<li class="list-group-item"></li>
+						<li class="list-group-item"></li>
+						<li class="list-group-item"></li>
+					</ul>
+					<ul class="list-group list-group-horizontal-xxl">
+						<li class="list-group-item"></li>
+						<li class="list-group-item"></li>
+						<li class="list-group-item"></li>
+						<li class="list-group-item"></li>
+						<li class="list-group-item"></li>
+						<li class="list-group-item"></li>
+						<li class="list-group-item"></li>
+						<li class="list-group-item"></li>
+						<li class="list-group-item"></li>
+					</ul>
+				</div>
+				<div class="tab-pane fade" id="store_list" role="tabpanel" aria-labelledby="store_list-tab">
+					<br><h2><strong>점포목록</strong></h2><br>
+					자료가 없어요..ㅠ
+				</div>
+				<div class="tab-pane fade" id="product_list" role="tabpanel" aria-labelledby="product_list-tab">
+					<br><h2><strong>품목목록</strong></h2><br>
+					자료가 없어요..ㅠ
+				</div>
+				<div class="tab-pane fade" id="direction" role="tabpanel" aria-labelledby="direction-tab">
+					<br><h2><strong>오시는길</strong></h2><br>
+					<div>
+						<div id="map" style="width:500px;height:450px;"></div>
+						<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=da146a2a6ff6a54903c1d2a7caecd1c7"></script>
+						<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=da146a2a6ff6a54903c1d2a7caecd1c7&libraries=services"></script>
+						<script>
+							var container = document.getElementById('map');
+							var options = {
+								center : new kakao.maps.LatLng(35.10111802444522, 129.02808158205954),
+								level : 7
+							};
+							var map = new kakao.maps.Map(container, options);
+							
+							var position = {
+									title: '국제시장',
+									latlng: new kakao.maps.LatLng(35.10111802444522, 129.02808158205954),
+									url: 'market_detail?market=gukje'
+								};
+							
+							var imageSrc = '/images/marker.png';
+							var imageSize = new kakao.maps.Size(64, 69); 
+							    
+						    // 마커 이미지를 생성합니다    
+						    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
+						    
+						    // 마커를 생성합니다
+						    var marker = new kakao.maps.Marker({
+						        map: map, // 마커를 표시할 지도
+						        position: position.latlng, // 마커를 표시할 위치
+						        title : position.title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+						        image : markerImage // 마커 이미지 
+						    });
+						    var infowindow = new kakao.maps.InfoWindow({
+				        		content: position.title // 인포윈도우에 표시할 내용
+				    		});
+				    		
+						    kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+						    kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+							
+							function makeOverListener(map, marker, infowindow) {
+							    return function() {
+							        infowindow.open(map, marker);
+							    };
+							}
+							
+							function makeOutListener(infowindow) {
+							    return function() {
+							        infowindow.close();
+							    };
+							}
+						</script>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer th:replace="common/footer"></footer>
+
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="common/head"></head>
+
+<body>
+	<script>
+		$(document).ready(function(){
+			$.ajax({
+				url:"http://localhost:8080/market_detail?market=busanjin",
+				method:"POST",
+				dataType:"json",
+				success:function(data){
+					var str = "<div>";
+					var count = 0;
+					$.each(data, function(i, v){
+						if(count%6 == 0){
+							str += "<ul class=\"list-group list-group-horizontal-xxl\">";
+						}
+						str += "<li class=\"list-group-item\">" + v.name + "</li>";
+						if(count%6 == 5){
+							str += "</ul>";
+						}
+						count++;
+					});
+					if(count%6 != 5){
+						str += "</ul>";
+					}
+					str += "</div>";
+					$("#store_list").html(str);
+					
+					var str = "<div>";
+					var count = 0;
+					$.each(data, function(i, v){
+						if(count%3 == 0){
+							str += "<ul class=\"list-group list-group-horizontal-xxl\">";
+						}
+						str += "<li class=\"list-group-item\">" + v.products + "</li>";
+						if(count%3 == 2){
+							str += "</ul>";
+						}
+						count++;
+					});
+					if(count%3 != 2){
+						str += "</ul>";
+					}
+					str += "</div>";
+					$("#product_list").html(str);
+				}
+			});
+		});
+	</script>
+	<header class="container-fluid text-center" th:replace="common/header"></header>
+
+	<nav class="navbar navbar-inverse" th:replace="common/nav"></nav>
+
+	<div style="width: 100%;height:100%;">
+		<div class="market_detail_sidebar" th:replace="market_detail/sidebar"></div>
+		
+		<div style="float:left;width:70%;height:100%;margin:20px;">
+			<h1>부산진시장</h1>
+			
+			<ul class="nav nav-tabs" id="myTab" role="tablist">
+				<li class="nav-item" role="presentation">
+					<button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">소개</button>
+				</li>
+				<li class="nav-item" role="presentation">
+					<button class="nav-link" id="store_list-tab" data-bs-toggle="tab" data-bs-target="#store_list" type="button" role="tab" aria-controls="store_list" aria-selected="false">점포목록</button>
+				</li>
+				<li class="nav-item" role="presentation">
+					<button class="nav-link" id="product_list-tab" data-bs-toggle="tab" data-bs-target="#product_list" type="button" role="tab" aria-controls="product_list" aria-selected="false">품목목록</button>
+				</li>
+				<li class="nav-item" role="presentation">
+					<button class="nav-link" id="direction-tab" data-bs-toggle="tab" data-bs-target="#direction" type="button" role="tab" aria-controls="direction" aria-selected="false">오시는길</button>
+				</li>
+			</ul>
+			<div class="tab-content" id="myTabContent">
+				<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+					<br><h2><strong>소개</strong></h2><hr><br><br>
+					<h3>부산 최대의 명물 전통시장 <strong>'부산진시장'</strong></h3><hr>
+					부산진시장은 혼수와 원단특화 전문시장으로 아주 유명한 곳으로써, 서울 동대문시장, 대구 서문시장과 함께 전국 3대 시장의 하나로 불리고 있습니다.<br>
+					백화점 못지 않은 많은 물품과 방대한 종류의 상품들을 판매하는 1350여 개의 점포들이 입점해 있습니다.<br>
+					한복, 원단, 이불, 그릇 등 혼수용품과 의류, 악세사리 뿐 아니라 식육점과 분식점, 해산물까지 수용하고 있으며<br>
+					그 밖에도 많은 품목을 판매하고 있습니다.<br>
+					특히 혼수, 원단용품 점포가 600여 개에 달하여 경남은 물론 전국에서 도매상들이 물건을 사기 위해 찾을 정도 특화된 시장입니다.<br>
+					부산진시장은 연면적 2만9239m2(8844평) 규모의 지하2층, 지상3층짜리의 현대적 건물로<br>
+					전 층의 대리석 시설을 완비하여 고객 여러분께 깨끗하고 쾌적한 실내환경을 제공하고 있습니다.<br>
+					또한, 컴퓨터, 바둑 등을 즐길 수 있는 휴게실과 부모님들의 편의를 위한 유아휴게실 그리고 옥상에 만남의 장이 준비되어 있으며,<br>
+					1000대를 주차할 수 있는 별도의 주차 건물을 보유하고 있습니다.<br>
+					“저희 부산진시장은 현대적 전통시장의 대표적 사례로써 지역사회 발전과 재래시장 활성화에 혼신을 다하고 있습니다.”<br>
+					<p><img src="/images/busanjin_home1.jpg" width="600"></p><br><br><br>
+					<h3>100여년 이상의 역사를 간직한 <strong>'부산진시장'</strong></h3><hr>
+					<div style="float: left;margin:10px"><img src="/images/busanjin_home2.jpg" width="200"></div>
+					부산진시장은 1913년 9월 40평과 60평짜리 2동의 함석상가를 지어 매일 열리는 상설시장이 됐으며,<br>
+					1930년 10월에 대지 2000평, 건평 200평 규모의 시장을 건립해 시장번영회를 발족한 뒤,<br>
+					다시 지난 58년 2월 목조건물을 단층에서 2층으로 증축해 연건평 4000평을 설립해 운영되었다.<br>
+					1964년 부산광역시의 부산진시장 민영화 방침 결정에 따라 1967년 7월 부산동구 초량동 1161번지의 사유지에<br>
+					약 1300평의 시장가건물을 건립했고, 가설시장으로 이전하였다.<br>
+					1968년 3월에는 현재의 부산진시장 건물을 착공해 이듬해 총 8000평의 현대화 철골 코크리트 건물로 지하2층, 지상 3층으로 완공하였다.<br>
+					이후 지난 1993년 5월 시장 상인들이 주축이 되어 290억 원의 사업비를 마련해 동시주차 1000대 규모의 주차빌딩을 건립하였고,<br>
+					1997년 8월 냉/난방 및 환기시설을 완비하고 2002년부터 2008년까지 외벽 및 마감 리모델링,<br>
+					에스컬레이터와 엘리베이터 교체 및 설치, 인터넷 홈페이지 구축, 고객편의 수유실 마련 등 일련의 현대화 사업을 통해 오늘에 이르렀다.<br>
+				</div>
+				<div class="tab-pane fade" id="store_list" role="tabpanel" aria-labelledby="store_list-tab">
+					<br><h2><strong>점포목록</strong></h2><br>
+				</div>
+				<div class="tab-pane fade" id="product_list" role="tabpanel" aria-labelledby="product_list-tab">
+					<br><h2><strong>품목목록</strong></h2><br>
+				</div>
+				<div class="tab-pane fade" id="direction" role="tabpanel" aria-labelledby="direction-tab">
+					<br><h2><strong>오시는길</strong></h2><br>
+					<div>
+						<div id="map" style="width:500px;height:450px;"></div>
+						<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=da146a2a6ff6a54903c1d2a7caecd1c7"></script>
+						<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=da146a2a6ff6a54903c1d2a7caecd1c7&libraries=services"></script>
+						<script>
+							var container = document.getElementById('map');
+							var options = {
+								center : new kakao.maps.LatLng(35.13672877672118, 129.05901214387575),
+								level : 7
+							};
+							var map = new kakao.maps.Map(container, options);
+							
+							var position = {
+									title: '부산진시장',
+									latlng: new kakao.maps.LatLng(35.13672877672118, 129.05901214387575),
+									url: 'market_detail?market=busanjin'
+								};
+							
+							var imageSrc = '/images/marker.png';
+							var imageSize = new kakao.maps.Size(64, 69); 
+							    
+						    // 마커 이미지를 생성합니다    
+						    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
+						    
+						    // 마커를 생성합니다
+						    var marker = new kakao.maps.Marker({
+						        map: map, // 마커를 표시할 지도
+						        position: position.latlng, // 마커를 표시할 위치
+						        title : position.title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+						        image : markerImage // 마커 이미지 
+						    });
+						    var infowindow = new kakao.maps.InfoWindow({
+				        		content: position.title // 인포윈도우에 표시할 내용
+				    		});
+				    		
+						    kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+						    kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+							
+							function makeOverListener(map, marker, infowindow) {
+							    return function() {
+							        infowindow.open(map, marker);
+							    };
+							}
+							
+							function makeOutListener(infowindow) {
+							    return function() {
+							        infowindow.close();
+							    };
+							}
+						</script>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer class="container-fluid text-center" th:replace="common/footer"></footer>
+
+</body>
+</html>

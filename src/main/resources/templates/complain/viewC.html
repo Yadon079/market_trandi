@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="common/head">
+ <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <title>게시판</title>
+
+</head>
+
+<body>
+	<nav class="navbar navbar-inverse" th:replace="common/nav">
+	</nav>
+	
+	
+<div class="container">
+  <div class="jumbotron">
+  
+    <h2>COMPALIN</h2><hr>
+    <div class="panel panel-default">
+				<div class="panel-heading"  th:text="'게시물번호 : '+${complain.id} + '번'" ></div>
+				<div class="panel-heading" th:text="'제목 : ' + ${complain.title}"></div>
+				<div class="panel-body" th:text="'내용 : ' + ${complain.content}"></div>
+				<div class="panel-footer" th:text="'ID : ' + ${complain.userId}"></div>
+			</div>
+
+  </div>
+
+</div>
+
+	<div class="container text-right">
+			<div class="d-grid gap-2 col-6 mx-auto">
+		  <button class="btn btn-primary" type="button" id="list">목록</button>
+		  <button class="btn btn-primary" type="button"id="update">수정</button>
+		  <button class="btn btn-primary" type="button"id="delete">삭제</button>
+		</div>
+
+	</div>
+	<br>
+		
+<!--<div class="container">
+		<div id="disqus_thread"></div>
+<script>
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.creat eElement('script');
+    s.src = 'https://chuleee.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+		
+		<script>
+		var disqus_config = function(){
+			this.page.url='{{content.absolute.url}}';
+			this.page.identifier='{{content_id}}';
+		}
+		(function(){
+			var d = document, s = d.createElement('script');
+			s.src='https://chuleee.disqus.com/embed.js';
+			s.setAttribute('data-timestamp', +new Date());
+			(d.head || d.body).appendChild(s);
+		})();
+		</script>
+		-->
+	<footer class="container-fluid text-center" th:replace="common/footer">
+	</footer>
+
+	<script>
+		$("#list").click(function () {
+			location = "/board";
+			return false;
+		});
+		$("#update").click(function () {
+			location = "/complain/updateC/" + "[[${complain.id}]]";
+			return false;
+		});
+		$("#delete").click(function () {
+			location = "/complain/delete/" + "[[${complain.id}]]";
+			return false;
+		});
+	</script>
+
+</body>
+
+
+
+</html>

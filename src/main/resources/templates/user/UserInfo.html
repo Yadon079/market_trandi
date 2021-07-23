@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>내정보</title>
+</head>
+<body>
+<h1>
+    <span>[[${members.nickname}]]</span> 님의 마이페이지
+</h1>
+<hr>
+
+<h3> 공개 프로필 </h3>
+
+<span th:if="${members.profile}">프로필 사진 : [[${members.profile}]]</span> <br>
+<span th:unless="${members.profile}">프로필 사진 : 사진이 없습니다.</span> <br>
+닉네임 : <span th:text="${members.nickname}"></span> <br>
+성별 : <span th:text="${members.gender}"></span> <br>
+연령 : <span th:text="${members.age}"></span> <br>
+
+<hr>
+
+<h3>활동 내역 </h3>
+
+활동 지역 : <span th:text="${members.location}"></span> <br>
+
+
+<hr>
+
+<div>
+    <table>
+        <thead>
+        <tr>
+            <th>나의 작성글</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="market :${marketList}">
+            <td th:text="${market.title}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<hr>
+
+<h3> 진행중인 서비스 </h3>
+
+<hr>
+
+<div>
+    <table>
+        <thead>
+        <tr>
+            <th>찜 목록</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="market :${wish}">
+            <td th:text="${market.title}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

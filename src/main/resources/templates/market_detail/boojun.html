@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="common/head"></head>
+
+<body>
+
+	<header class="container-fluid text-center" th:replace="common/header"></header>
+	
+	<nav class="navbar navbar-inverse" th:replace="common/nav"></nav>
+	
+	<div style="width: 100%;height:100%;">
+		<div class="market_detail_sidebar" th:replace="market_detail/sidebar"></div>
+		
+		<div style="float:left;width:70%;height:100%;margin:20px;">
+			<h1>부전시장</h1>
+			
+			<ul class="nav nav-tabs" id="myTab" role="tablist">
+				<li class="nav-item" role="presentation">
+					<button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">소개</button>
+				</li>
+				<li class="nav-item" role="presentation">
+					<button class="nav-link" id="store_list-tab" data-bs-toggle="tab" data-bs-target="#store_list" type="button" role="tab" aria-controls="store_list" aria-selected="false">점포목록</button>
+				</li>
+				<li class="nav-item" role="presentation">
+					<button class="nav-link" id="product_list-tab" data-bs-toggle="tab" data-bs-target="#product_list" type="button" role="tab" aria-controls="product_list" aria-selected="false">품목목록</button>
+				</li>
+				<li class="nav-item" role="presentation">
+					<button class="nav-link" id="direction-tab" data-bs-toggle="tab" data-bs-target="#direction" type="button" role="tab" aria-controls="direction" aria-selected="false">오시는길</button>
+				</li>
+			</ul>
+			<div class="tab-content" id="myTabContent">
+				<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+					<br><h2><strong>소개</strong></h2><hr><br><br>
+					부산에서는 물론 전국에서도 최대 규모를 자랑하는 전통시장인 ‘부전마켓타운’은 부전동 573번지 일원에 거대한 상권을 형성하고 있다.<br>
+					보통은 이 시장을 하나로 뭉뚱그려 ‘부전시장’이라 부르고 있는데 사실은 6개 시장, 즉 부전시장(어물, 채소, 과일),<br>
+					부전인삼시장(인삼,꿀, 건강식품), 부산전자종합시장(전자제품), 서면종합시장(전자악기, 청과, 채소), 부전상가(어물, 의류, 잡화),<br>
+					부전종합상가(채소, 청과)가 합쳐져 있음을 아는 이는 그리 많지 않다. 부전마켓타운은 애당초‘기장골목시장’에서 출발하였다.<br>
+					6·25전쟁 이후 부산 근교인 기장, 서생, 일광, 월내 등지에서 생산된 농·수산물을 싣고 온 보따리장수들이<br>
+					동해남부선 부전역에서 짐을 풀고 행상을 벌인 것이 그 시초가 됐다. 기장골목시장이 부전시장이 되고, 부전마켓타운으로 발전한 것이다.<br>
+					2009년 말 현재 시장 규모는 6개 시장, 매장 면적 46,175㎡(13,968평), 3,027개 점포, 상인 수 4,123명에 이른다.<br>
+					2006년 12월에 부전마켓타운이라 이름 짓고 시장 활성화 구역으로 지정됐다.<br>
+					원조격인‘부전상가시장’은 노점과 재래식 건물(1~4층)에 입주한 상인들이 채소류, 어류, 축산물 등을 취급하고 있으며 부전마켓타운의 주축을 이룬다.<br>
+					2008년에 지붕 아케이드를 설치하는 한편 노점상과 간판 등을 말끔히 정비하고 편의시설도 다양하게 마련했다.<br>
+				</div>
+				<div class="tab-pane fade" id="store_list" role="tabpanel" aria-labelledby="store_list-tab">
+					<br><h2><strong>점포목록</strong></h2><br>
+					자료가 없어요..ㅠ
+				</div>
+				<div class="tab-pane fade" id="product_list" role="tabpanel" aria-labelledby="product_list-tab">
+					<br><h2><strong>품목목록</strong></h2><br>
+					자료가 없어요..ㅠ
+				</div>
+				<div class="tab-pane fade" id="direction" role="tabpanel" aria-labelledby="direction-tab">
+					<br><h2><strong>오시는길</strong></h2><br>
+					<div>
+						<div id="map" style="width:500px;height:450px;"></div>
+						<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=da146a2a6ff6a54903c1d2a7caecd1c7"></script>
+						<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=da146a2a6ff6a54903c1d2a7caecd1c7&libraries=services"></script>
+						<script>
+							var container = document.getElementById('map');
+							var options = {
+								center : new kakao.maps.LatLng(35.162769461733696, 129.06130357272224),
+								level : 7
+							};
+							var map = new kakao.maps.Map(container, options);
+							
+							var position = {
+									title: '부전마켓타운',
+									latlng: new kakao.maps.LatLng(35.162769461733696, 129.06130357272224),
+									url: 'market_detail?market=boojun'
+								};
+							
+							var imageSrc = '/images/marker.png';
+							var imageSize = new kakao.maps.Size(64, 69); 
+							    
+						    // 마커 이미지를 생성합니다    
+						    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
+						    
+						    // 마커를 생성합니다
+						    var marker = new kakao.maps.Marker({
+						        map: map, // 마커를 표시할 지도
+						        position: position.latlng, // 마커를 표시할 위치
+						        title : position.title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+						        image : markerImage // 마커 이미지 
+						    });
+						    var infowindow = new kakao.maps.InfoWindow({
+				        		content: position.title // 인포윈도우에 표시할 내용
+				    		});
+				    		
+						    kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+						    kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+							
+							function makeOverListener(map, marker, infowindow) {
+							    return function() {
+							        infowindow.open(map, marker);
+							    };
+							}
+							
+							function makeOutListener(infowindow) {
+							    return function() {
+							        infowindow.close();
+							    };
+							}
+						</script>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer class="container-fluid text-center" th:replace="common/footer"></footer>
+
+</body>
+</html>

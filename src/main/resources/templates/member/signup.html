@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta charset="UTF-8">
+	<title>회원가입 페이지</title>
+<style>
+    .table{
+        border:1px solid;
+        width: 1100px;
+    }
+    thead{
+        border-bottom: 1px solid gray;
+    }
+    .member{
+        border:1px solid;
+    }
+    .member:hover{
+        transition: all 0.3s;
+        background:#DED369;
+    }
+    #search{
+        border:1px solid lightgray;
+    }
+    .container{
+        display: flex;
+        justify-content: center;
+    }
+    .memberCenter{
+        text-align: center;
+    }
+
+</style>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+
+<body>
+	<div></div>
+	<h1>회원 가입</h1>
+	<hr>
+	<form action="/member/signup" method="post" >
+		<table>
+			<tr>
+				<th>
+					<img id="show_profile" height="240px">
+					<label for="profile"> 프로필 사진 </label>
+				</th>
+				<td>
+					<input id="profile" type="file" name="profile" accept=".jpg,.jpeg,.png,.gif" />
+				</td>
+			</tr>
+			<tr>
+				<th>
+					<label for="id"> 아이디 </label>
+				</th>
+				<td>
+					<input type="id" id="id" name="id" required>
+					<button class="emailCheck" type="button" id="emailCheck" onclick="fn_emailCheck()" value="N"> 중복확인
+					</button>
+				</td>
+			</tr>
+			<tr>
+				<th>
+					<label> 비밀번호 </label>
+				</th>
+				<td>
+					<input type="password" name="pwd" required>
+				</td>
+			</tr>
+			<tr>
+				<th>
+					<label> 이름 </label>
+				</th>
+				<td>
+					<input type="text" name="name" required>
+				</td>
+			</tr>
+			<tr>
+				<th>
+					<label> 닉네임 </label>
+				</th>
+				<td>
+					<input type="text" id="nickname" name="nickname" required>
+					<button class="nickCheck" type="button" id="nickCheck" onclick="fn_nickCheck();" value="N"> 중복확인
+					</button>
+				</td>
+			</tr>
+			<tr>
+				<th>
+					<label> 휴대폰 번호 </label>
+				</th>
+				<td>
+					<input type="text" id="phone" name="phone" required>
+					<button class="phoneCheck" type="button" id="phoneCheck" onclick="fn_phoneCheck();" value="N"> 중복확인
+					</button>
+				</td>
+			</tr>
+			<tr>
+				<th>
+					<label> 성별 </label>
+				</th>
+				<td>
+					<select type="text" name="gender" placeholder="성별" >
+						<option>-- 선택 --</option>
+						<option selected>남성</option>
+						<option>여성</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th>
+					<label> 나이 </label>
+				</th>
+				<td>
+					<input type="text" name="age" required>
+				</td>
+			</tr>
+
+			<tr>
+				<th>
+					<label> 주소 </label>
+				</th>
+				<td>
+					<select type="text" name="location" placeholder="주소">
+						<option>-- 선택 --</option>
+						<option>중구</option>
+						<option>동구</option>
+						<option>부전동</option>
+						<option>북구</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th>
+					<label>역할</label>
+				</th>
+				<td>
+					<label><input type="radio" name="role" value=1 checked>고객</label>
+					<lable> <input type="radio" name="role" value=2 >상인</lable>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<button type="submit">가입하기</button>
+				</td>
+			</tr>
+		</table>
+	</form>
+	<script>
+		function fn_emailCheck() {
+			$.ajax({
+				url: "/member/id",
+				type: "POST",
+				dataType: "JSON",
+				data: {"id": $("#id").val()},
+				success: function (data) {
+					if (data == 1) {
+						alert("중복된 아이디입니다.");
+					} else if (data == 0) {
+						$("#emailCheck").attr("value", "Y");
+						alert("사용 가능한 아이디입니다.");
+					}
+				}
+			});
+		}
+
+		function fn_nickCheck() {
+					$.ajax({
+						url: "/member/nickCheck",
+						type: "POST",
+						dataType: "JSON",
+						data: {"nickname": $("#nickname").val()},
+						success: function (data) {
+							if (data == 1) {
+								alert("중복된 닉네임입니다.");
+							} else if (data == 0) {
+								$("#nickCheck").attr("value", "Y");
+								alert("사용 가능한 닉네임입니다.")
+							}
+						}
+		
+					});
+				}
+		function fn_phoneCheck() {
+			$.ajax({
+				url: "/member/phoneCheck",
+				type: "POST",
+				dataType: "JSON",
+				data: {"phone": $("#phone").val()},
+				success: function (data) {
+					if (data == 1) {
+						alert("중복된 휴대폰 번호입니다.");
+					} else if (data == 0) {
+						$("#phoneCheck").attr("value", "Y");
+						alert("사용 가능한 휴대폰 번호입니다.")
+					}
+				}
+
+			});
+		}
+		
+		
+		function loadProfile() {
+	        var $file = $("#profile")[0].files[0];
+	        var reader = new FileReader();
+	
+	        reader.onload = function () {
+	            $("#show_profile").attr("src", reader.result);
+	        }
+	        reader.readAsDataURL($file);
+	    }
+	    $(document).ready(function () {
+	        $("#profile").on("change", loadProfile);
+	    })
+		</script>
+</body>
+
+</html>

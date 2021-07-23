@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/head">
+  <meta charset="UTF-8">
+  <title>Title</title>
+
+</head>
+<body>
+
+	<nav class="navbar navbar-inverse" th:replace="common/nav">
+	</nav>
+
+<section>
+  <aside>
+    <ul>
+      <li>
+        처리중
+        <p th:text="${orderCnt + '건'}"></p>
+      </li>
+      <li>완료</li>
+      <li>
+        <a th:href="@{/update}">
+          제품 등록
+        </a>
+      </li>
+    </ul>
+  </aside>
+</section>
+
+
+</body>
+</html>

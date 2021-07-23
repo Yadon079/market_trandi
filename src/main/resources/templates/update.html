@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>등록</title>
+</head>
+
+<body>
+<form role="form" method="post" autocomplete="off" enctype="multipart/form-data">
+
+  <div class="inputArea">
+    <label for="name">상품명</label>
+    <input type="text" id="name" name="name"/>
+  </div>
+
+<!--  <div class="inputArea">-->
+<!--    <label for="itemImg">상품이미지</label>-->
+<!--    <input type="file" id="itemImg" name="itemImg">-->
+<!--  </div>-->
+
+  <div class="inputArea">
+    <label for="cateCode">카테고리</label>
+    <input type="text" id="cateCode" name="cateCode"/>
+  </div>
+
+  <div class="inputArea">
+    <label for="price">상품가격</label>
+    <input type="text" id="price" name="price"/>
+  </div>
+
+  <div class="inputArea">
+    <label for="stock">상품수량</label>
+    <input type="text" id="stock" name="stock"/>
+  </div>
+
+  <div class="inputArea">
+    <label for="desc">상품소개</label>
+    <textarea rows="5" cols="50" id="desc" name="desc"></textarea>
+  </div>
+
+  <div class="inputArea">
+    <button type="submit" class="btn btn-primary">등록</button>
+  </div>
+
+</form>
+</body>
+
+</html>

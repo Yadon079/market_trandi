@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/head">
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+	<nav class="navbar navbar-inverse" th:replace="common/nav">
+	</nav>
+<h1>[[${itemInfo.name}]]</h1>
+
+<form role="form" method="post" autocomplete="off" enctype="multipart/form-data">
+
+  <h3>배송지 정보</h3>
+  <div class="inputArea">
+    <label for="deliAddress">배송지 입력</label>
+    <input type="text" id="deliAddress" name="deliAddress"/>
+  </div>
+
+  <div id="order_info">
+    <h3>결제상세</h3>
+    <table>
+      <tr>
+        <td>주문금액</td>
+        <td th:text="${itemInfo.price}"></td>
+      </tr>
+      <tr>
+        <td>결제금액</td>
+        <td></td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="inputArea">
+    <button type="submit" class="btn btn-primary">결제</button>
+  </div>
+
+</form>
+
+</body>
+</html>

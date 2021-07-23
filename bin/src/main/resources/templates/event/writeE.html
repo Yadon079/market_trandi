@@ -1,0 +1,71 @@
+<head th:replace="common/head"></head>
+<!--<div class="jumbotron">
+	<div class="container text-center">
+		<form method="post" action="/event/writeE">
+			<div class="form-group">
+				<label for="title">Title:</label>
+				<input type="text" class="form-control" name="title" id="title">
+			</div>
+			<div class="form-group">
+				<label for="content">Content:</label>
+				<textarea class="form-control" rows="5" name="content" id="content">
+				</textarea>
+			</div>
+			<button type="button" id="complete" class="btn btn-primary btn-block">
+				글쓰기
+			</button>
+		</form>
+	</div>
+</div>
+-->
+
+<div class="row">
+ <div class="col-md-2"></div>
+ <div class="col-md-8">
+  <h2 class="text-center">EVENT</h2><p></p><hr>
+  <form method="post" action="/event/writeE">
+  <form action="BoardReWriteProc.jsp" >
+   <div class="table table-responsive">
+       <table class="table table-striped">
+    
+    <tr>
+     <td>제목</td>
+     <td><input type="text" class="form-control" name="title" id="title"></td>
+    </tr>
+    <tr>
+      
+    <tr>
+     <td>글내용</td>
+     <td><textarea rows="10" cols="50" name="content" class="form-control"></textarea></td>
+    </tr>
+     <tr> 
+     <td colspan="2"  class="text-center">
+     
+      <input type="hidden" name="num"  value="<%= num %>">
+      <input type="hidden" name="ref"  value="<%= ref %>">
+      <input type="hidden" name="ref_step"  value="<%= ref_step %>">
+      <input type="hidden" name="ref_level"  value="<%= ref_level %>">
+     
+      <button type="button" id="complete" class="btn btn-primary btn-block">
+				글쓰기
+			</button>
+     </td>
+    </tr>
+    
+    </table>
+  
+ 
+   </div>
+  </form> 
+  	</form>
+ </div>
+</div>
+
+
+
+<script>
+	$("#complete").click(function () {
+		$("form").submit();
+		return false;
+	});
+</script>

@@ -1,0 +1,73 @@
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+// make it as accordion for smaller screens
+if (window.innerWidth > 992) {
+
+	document.querySelectorAll('.navbar .nav-item').forEach(function(everyitem){
+
+		everyitem.addEventListener('mouseover', function(e){
+			let el_link = this.querySelector('a[data-bs-toggle]');
+			
+			if(el_link != null){
+				let nextEl = el_link.nextElementSibling;
+				el_link.classList.add('show');
+				nextEl.classList.add('show');
+			}
+		});
+		everyitem.addEventListener('mouseleave', function(e){
+			let el_link = this.querySelector('a[data-bs-toggle]');
+
+			if(el_link != null){
+				let nextEl = el_link.nextElementSibling;
+				el_link.classList.remove('show');
+				nextEl.classList.remove('show');
+			}
+		})
+	});
+}
+// end if innerWidth
+}); 
+</script>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">홈페이지</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="/market_info">전통시장</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/board">게시판</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/list">상품 목록</a>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            주문 관리
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <li><a class="dropdown-item" href="/owner">관리 페이지</a></li>
+            <li><a class="dropdown-item" href="/update">상품 등록</a></li>
+          </ul>
+        </li>
+      </ul>
+      
+	<div>
+		<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom navbar-right">
+			<div class="collapse navbar-collapse flex-grow-0" id="navbarNav">
+				<ul class="navbar-nav">
+					<li class="nav-item ">
+						<a class="nav-link" th:href="@{/signout}" th:text="로그아웃"></a>
+						<a class="nav-link" th:href="@{/member/login}" th:text="로그인"></a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+  </div>
+</nav>

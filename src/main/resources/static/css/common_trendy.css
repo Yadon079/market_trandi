@@ -1,0 +1,22 @@
+@charset "UTF-8";
+@import 'common.css';
+body,
+input,
+textarea,
+select,
+button,
+table {
+    font-family: Helvetica, '나눔고딕', 'Nanum Gothic', '나눔스퀘어', 'Nanum Square', 'Apple SD Gothic Neo', 'Malgun Gothic', '맑은 고딕', Dotum, '돋움', sans-serif;
+    font-size: 12px;
+    line-height: 1.5em;
+}
+body {
+    position: relative;
+    background-color: #ffffff;
+}
+a,
+a:hover,
+a:active,
+a:focus {
+    text-decoration: none;
+}

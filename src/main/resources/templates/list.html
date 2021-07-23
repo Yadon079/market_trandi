@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/head">
+  <!--  <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+      /* Remove the navbar's default margin-bottom and rounded borders */
+      .navbar {
+        margin-bottom: 0;
+        border-radius: 0;
+      }
+
+      /* Add a gray background color and some padding to the footer */
+      footer {
+        background-color: #f2f2f2;
+        padding: 25px;
+      }
+    </style>-->
+</head>
+
+<body>
+
+	<nav class="navbar navbar-inverse" th:replace="common/nav">
+	</nav>
+<section id="container">
+  <div id="container_box">
+    <table>
+      <thead>
+      <tr>
+        <th>썸네일</th>
+        <th>이름</th>
+        <th>카테고리</th>
+        <th>가격</th>
+        <th>수량</th>
+        <th>등록날짜</th>
+      </tr>
+      </thead>
+      <tbody>
+        <tr th:each="product : ${list}">
+          <td>
+            <img src="">
+          </td>
+          <td>
+            <a th:href="@{/item(id=${product.id})}" th:text="${product.name}"></a>
+          </td>
+          <td th:text="${product.cateCode}"></td>
+          <td th:text="${#numbers.formatInteger(product.price, 0, 'COMMA')}"></td>
+          <td th:text="${product.stock}"></td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</section>
+
+</body>
+</html>

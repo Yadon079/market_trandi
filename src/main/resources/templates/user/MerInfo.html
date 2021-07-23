@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>메인</title>
+    <link rel="stylesheet" type="text/css" href="/css/header.css">
+</head>
+<body>
+<h1>상인 페이지</h1>
+<hr>
+<a th:href="@{/}">홈페이지</a>
+<a th:href="@{/member/logout}" th:if="${session.id != null}">로그아웃</a>
+<a th:href="@{/member/info}" th:if="${session.id != null}">내정보</a>
+</body>
+</html>

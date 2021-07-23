@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="common/head"></head>
+
+<body>
+	<header class="container-fluid text-center" th:replace="common/header"></header>
+
+	<nav class="navbar navbar-inverse" th:replace="common/nav"></nav>
+
+	<div style="width: 100%;height:100%;">
+		<div class="market_detail_sidebar" th:replace="market_detail/sidebar"></div>
+		
+		<div style="float:left;width:70%;height:100%;margin:20px;">
+			<h1>정이 있는 구포시장</h1>
+			
+			<ul class="nav nav-tabs" id="myTab" role="tablist">
+				<li class="nav-item" role="presentation">
+					<button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">소개</button>
+				</li>
+				<li class="nav-item" role="presentation">
+					<button class="nav-link" id="store_list-tab" data-bs-toggle="tab" data-bs-target="#store_list" type="button" role="tab" aria-controls="store_list" aria-selected="false">점포목록</button>
+				</li>
+				<li class="nav-item" role="presentation">
+					<button class="nav-link" id="product_list-tab" data-bs-toggle="tab" data-bs-target="#product_list" type="button" role="tab" aria-controls="product_list" aria-selected="false">품목목록</button>
+				</li>
+				<li class="nav-item" role="presentation">
+					<button class="nav-link" id="direction-tab" data-bs-toggle="tab" data-bs-target="#direction" type="button" role="tab" aria-controls="direction" aria-selected="false">오시는길</button>
+				</li>
+			</ul>
+			<div class="tab-content" id="myTabContent">
+				<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+					<br><h2><strong>소개</strong></h2><hr><br><br>
+					400여년의 역사를 가진 전통시장으로 1972년 상설시장이 되었지만 5일장으로 더 잘 알려져<br>
+					지금도 3, 8, 13, 18, 23, 28일에 장이 선다. 취급 품목은 생활 필수품부터 각종 야채, 어류, 육류 등이 주를 이루며,<br>
+					가격이 저렴하고 산지에서 직거래로 유통되는 신선한 상품을 제공한다는 장점이 있다.<br>
+					또 한 매달 4주 토요일 쌈지공원에서 열리는 토요문화축제도 볼만하다.  2011년 중소기업청으로부터<br>
+					문화관광형시장으로 선정되어 다양한 이벤트를 개최하고 있고, 구포경, 나룻카페 등 다양한 볼거리를 제공하고 있다.<br>
+					취급품목은 농산물, 의류, 식당, 가축이며, 영업시장은 24시간, 연중무휴 운영이다.<br>
+					구포시장 주변의 볼거리로는 구포시장이 낙동강 하류에 위치하고 있어 주변에 유명관광지 못지 않은 다양한 볼거리가 가득하다.<br>
+					구포왜성과 만덕사지 당간지주, 병풍암과 마애석불, 금곡동 율리패총, 대천천의 애기소와 도시철도 구포역,<br>
+					그리고 덕천공원과 부산화명수목원, 화명생태공원 등 과거와 현재를 아우르는 다양한 볼거리들은 가족은 물론 연인과 함께하기 좋은 곳이다.<br>
+				</div>
+				<div class="tab-pane fade" id="store_list" role="tabpanel" aria-labelledby="store_list-tab">
+					<br><h2><strong>점포목록</strong></h2><br>
+					자료가 없어요..ㅠ
+				</div>
+				<div class="tab-pane fade" id="product_list" role="tabpanel" aria-labelledby="product_list-tab">
+					<br><h2><strong>품목목록</strong></h2><br>
+					자료가 없어요..ㅠ
+				</div>
+				<div class="tab-pane fade" id="direction" role="tabpanel" aria-labelledby="direction-tab">
+					<br><h2><strong>오시는길</strong></h2><br>
+					<div>
+						<div id="map" style="width:500px;height:450px;"></div>
+						<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=da146a2a6ff6a54903c1d2a7caecd1c7"></script>
+						<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=da146a2a6ff6a54903c1d2a7caecd1c7&libraries=services"></script>
+						<script>
+							var container = document.getElementById('map');
+							var options = {
+								center : new kakao.maps.LatLng(35.209261060071114, 129.00356512805195),
+								level : 7
+							};
+							var map = new kakao.maps.Map(container, options);
+							
+							var position = {
+									title: '구포시장',
+									latlng: new kakao.maps.LatLng(35.209261060071114, 129.00356512805195),
+									url: 'market_detail?market=gupo'
+								};
+							
+							var imageSrc = '/images/marker.png';
+							var imageSize = new kakao.maps.Size(64, 69); 
+							    
+						    // 마커 이미지를 생성합니다    
+						    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
+						    
+						    // 마커를 생성합니다
+						    var marker = new kakao.maps.Marker({
+						        map: map, // 마커를 표시할 지도
+						        position: position.latlng, // 마커를 표시할 위치
+						        title : position.title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+						        image : markerImage // 마커 이미지 
+						    });
+						    var infowindow = new kakao.maps.InfoWindow({
+				        		content: position.title // 인포윈도우에 표시할 내용
+				    		});
+				    		
+						    kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+						    kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+							
+							function makeOverListener(map, marker, infowindow) {
+							    return function() {
+							        infowindow.open(map, marker);
+							    };
+							}
+							
+							function makeOutListener(infowindow) {
+							    return function() {
+							        infowindow.close();
+							    };
+							}
+						</script>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer class="container-fluid text-center" th:replace="common/footer"></footer>
+
+</body>
+</html>

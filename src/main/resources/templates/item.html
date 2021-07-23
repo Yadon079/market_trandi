@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common/head_item">
+  <!--  <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+      /* Remove the navbar's default margin-bottom and rounded borders */
+      .navbar {
+        margin-bottom: 0;
+        border-radius: 0;
+      }
+
+      /* Add a gray background color and some padding to the footer */
+      footer {
+        background-color: #f2f2f2;
+        padding: 25px;
+      }
+    </style>-->
+</head>
+<body>
+
+<div id="contents">
+  <div class="">
+    <div class="detailArea">
+      <!-- 이미지 영역 -->
+      <div id="imgArea" class="">
+        <div class="keyImg ">
+          <div class="thumbnail">
+            <img src="" alt="제품 이미지" class="BigImage">
+          </div>
+        </div>
+      </div>
+      <!-- //이미지 영역 -->
+
+      <!-- 상세정보 내역 -->
+      <div id="infoArea" class="" data-mcs-theme="dark-thin">
+        <div class="">
+          <!--
+          출력 갯수 지정 변수, 없으면 설정된 전체가 나옵니다.
+          count = 20
+          -->
+          <table border="1" summary="" class="prd_info">
+            <caption>기본 정보</caption>
+            <tbody>
+            <tr>
+              <td coslpan="2">
+                <div class="optCon">
+                  <span style="font-size:24px; color:#555555; font-weight: bold" th:text="${item.name}"></span>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td coslpan="2" style="text-align: right">
+                <div class="optCon">
+                    <span style="font-size:12px; color:#555555;">
+                      <strong id="span_product_price_text" th:text="${item.price}"></strong>
+                    </span>
+                </div>
+              </td>
+            </tr>
+            <tr style="border-bottom: 1px solid #e2e2e2;">
+              <td coslpan="2" style="padding: 15px;">
+                <div class="optTit" style="border-right: 1px solid #e2e2e2">
+                  <span style="font-size:12px; color:#555555;" data-i18n="PRODUCT.PRD_INFO_MADE_IN">원산지</span>
+                </div>
+                <div class="optCon">
+                  <span style="font-size:12px;color:#555555;">상세페이지 참조</span>
+                </div>
+              </td>
+            </tr>
+            <tr style="border-bottom: 1px solid #e2e2e2;">
+              <td coslpan="2" style="padding: 15px;">
+                <div class="optTit" style="border-right: 1px solid #e2e2e2">
+                  <span style="font-size:12px; color:#555555;" data-i18n="PRODUCT.PRD_INFO_MADE_IN">택배</span>
+                </div>
+                <div class="optCon">
+                  <span style="font-size:12px;color:#555555;">무료 배송</span>
+                </div>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- //상세정보 내역 -->
+
+
+        <!-- 선택상품 노출되는 부분 -->
+        <div id="totalProducts" class="">
+          <table border="1" summary="">
+            <thead>
+            <tr>
+              <th scope="col">상품명</th>
+              <th scope="col">상품수</th>
+              <th scope="col">가격</th>
+            </tr>
+            </thead>
+            <tbody class="">
+            <tr>
+              <td th:text="${item.name}"></td>
+              <td>
+                <span class="quantity">
+                  <input id="quantity" name="quantity_opt[]" style="" value="0" type="text">
+                  <button>
+                    <img src="//img.echosting.cafe24.com/skin/base_ko_KR/product/btn_count_up.gif" alt="수량증가"
+                         class=" up">
+                  </button>
+                  <a href="#none">
+                    <img src="//img.echosting.cafe24.com/skin/base_ko_KR/product/btn_count_down.gif" alt="수량감소"
+                         class=" down">
+                  </a>
+                </span>
+              </td>
+              <td class="right">
+                <span class="quantity_price" th:text="${item.price}">
+                  <input type="hidden" name="option_box_price" class="option_box_price" value="37800"
+                         item_code="P00000DU000A">
+                </span>
+              </td>
+            </tr>
+            </tbody>
+
+          </table>
+        </div>
+        <!-- //참고 -->
+        <!-- //선택상품 노출되는 부분 -->
+
+        <!-- 총 상품금액 -->
+        <div id="totalPrice" class="totalPrice">
+          <strong>총 상품금액</strong>(수량) : <span class="total"><strong><em>0원</em></strong> (0개)</span>
+        </div>
+        <p class="ec-base-help txt11 displaynone EC-price-warning">할인가가 적용된 최종 결제예정금액은 주문 시 확인할 수 있습니다.</p>
+
+        <!-- 버튼영역 -->
+        <div class="xans-element- xans-product xans-product-action ">
+          <div class="ec-base-button">
+            <a href="#none" onclick="add_wishlist_nologin('/member/login.html');" class=" btn_white">WISHLIST</a>
+            <a href="#none" class="btn_white" onclick="product_submit(2, '/exec/front/order/basket/', this)">장바구니</a>
+            <a th:href="@{/order(id=${item.id})}" class="first btn_point buy" onclick="product_submit(1, '/exec/front/order/basket/', this)">바로구매</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- info -->
+<div class="_2ZMO1PVXbA">
+  <div class="z7cS6-TO7X">
+    <div class="_1uAhdC96R1">
+      <div class="_2_d8WcZHA-">
+        <div class="_3ebPKmwfY_">
+          <h4 class="_3HazHt191K">베스트 상품</h4>
+          <div class="_2V7vdpHlJ3">
+            <ul class="OdAoJ-HKEa">
+              <li class="O4eQ9kxANM" role="presentation">
+                <div class="_37DhuZkW80">
+                  <div class="_23B6AmPmQJ"></div>
+                  <div class="_2OF0tTaYyf">
+                    <div class="_2JNWBGd-04 _3uKZ70Wwcp _1qpDLedTAQ">
+                      <img class="_25CKxIKjAk" src="" alt="best1">
+                    </div>
+                  </div>
+                </div>
+                <p class="_1WCSbtzfKk">best1</p>
+                <div class="_23_NQDYrm0">
+                  <strong class="_39VwIJlazp">
+                    <span class="_2YVqVFJcjQ">55,000</span>원
+                  </strong>
+                  <del class="_39VwIJlazp _1q5J74vF8O">
+                    <span class="_2YVqVFJcjQ">58,000</span>원
+                  </del>
+                </div>
+                <a href="/freshpork/products/5346790538" class="_3a9trS5pR6 N=a:bpd.product linkAnchor">
+                  <span class="blind">상품상세로 이동</span>
+                </a>
+              </li>
+              <li class="O4eQ9kxANM" role="presentation">
+                <div class="_37DhuZkW80">
+                  <div class="_23B6AmPmQJ"></div>
+                  <div class="_2OF0tTaYyf">
+                    <div class="_2JNWBGd-04 _3uKZ70Wwcp _1qpDLedTAQ">
+                      <img class="_25CKxIKjAk" src="" alt="best2">
+                    </div>
+                  </div>
+                </div>
+                <p class="_1WCSbtzfKk">best2</p>
+                <div class="_23_NQDYrm0">
+                  <strong class="_39VwIJlazp">
+                    <span class="_2YVqVFJcjQ">55,000</span>원
+                  </strong>
+                  <del class="_39VwIJlazp _1q5J74vF8O">
+                    <span class="_2YVqVFJcjQ">58,000</span>원
+                  </del>
+                </div>
+                <a href="/freshpork/products/5346790538"
+                   class="_3a9trS5pR6 N=a:bpd.product linkAnchor"><span
+                  class="blind">상품상세로 이동</span></a>
+              </li>
+              <li class="O4eQ9kxANM" role="presentation">
+                <div class="_37DhuZkW80">
+                  <div class="_23B6AmPmQJ"></div>
+                  <div class="_2OF0tTaYyf">
+                    <div class="_2JNWBGd-04 _3uKZ70Wwcp _1qpDLedTAQ">
+                      <img class="_25CKxIKjAk" src="" alt="best3">
+                    </div>
+                  </div>
+                </div>
+                <p class="_1WCSbtzfKk">best3</p>
+                <div class="_23_NQDYrm0">
+                  <strong class="_39VwIJlazp">
+                    <span class="_2YVqVFJcjQ">55,000</span>원
+                  </strong>
+                  <del class="_39VwIJlazp _1q5J74vF8O">
+                    <span class="_2YVqVFJcjQ">58,000</span>원
+                  </del>
+                </div>
+                <a href="/freshpork/products/5346790538" class="_3a9trS5pR6 N=a:bpd.product linkAnchor">
+                  <span class="blind">상품상세로 이동</span>
+                </a>
+              </li>
+              <li class="O4eQ9kxANM" role="presentation">
+                <div class="_37DhuZkW80">
+                  <div class="_23B6AmPmQJ"></div>
+                  <div class="_2OF0tTaYyf">
+                    <div class="_2JNWBGd-04 _3uKZ70Wwcp _1qpDLedTAQ"><img class="_25CKxIKjAk"
+                                                                          src=""
+                                                                          alt="best4">
+                    </div>
+                  </div>
+                </div>
+                <p class="_1WCSbtzfKk">best4</p>
+                <div class="_23_NQDYrm0"><strong class="_39VwIJlazp"><span
+                  class="_2YVqVFJcjQ">55,000</span>원</strong>
+                  <del class="_39VwIJlazp _1q5J74vF8O"><span class="_2YVqVFJcjQ">58,000</span>원
+                  </del>
+                </div>
+                <a href="/freshpork/products/5346790538"
+                   class="_3a9trS5pR6 N=a:bpd.product linkAnchor"><span
+                  class="blind">상품상세로 이동</span></a>
+              </li>
+              <li class="O4eQ9kxANM" role="presentation">
+                <div class="_37DhuZkW80">
+                  <div class="_23B6AmPmQJ"></div>
+                  <div class="_2OF0tTaYyf">
+                    <div class="_2JNWBGd-04 _3uKZ70Wwcp _1qpDLedTAQ"><img class="_25CKxIKjAk"
+                                                                          src=""
+                                                                          alt="best5">
+                    </div>
+                  </div>
+                </div>
+                <p class="_1WCSbtzfKk">best5</p>
+                <div class="_23_NQDYrm0"><strong class="_39VwIJlazp"><span
+                  class="_2YVqVFJcjQ">55,000</span>원</strong>
+                  <del class="_39VwIJlazp _1q5J74vF8O"><span class="_2YVqVFJcjQ">58,000</span>원
+                  </del>
+                </div>
+                <a href="/freshpork/products/5346790538"
+                   class="_3a9trS5pR6 N=a:bpd.product linkAnchor"><span
+                  class="blind">상품상세로 이동</span></a>
+              </li>
+            </ul>
+          </div>
+          <div class="_1IPlkE4XNY">
+            <div class="_1jy9SBgu6T N=a:bpd.more">
+              <button class="_3XH5dVKJS2 _1KofysUxLF"><span class="blind">이전 목록</span></button>
+              <button class="_3XH5dVKJS2 EjwMRFFwcV"><span class="blind">다음 목록</span></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="_27jmWaPaKy" style="margin-top: 40px; margin-bottom: 29px;">
+      <ul class="_1YrqjEd5tF" role="menubar">
+        <li class="_1k5R-niA93" role="presentation"><a href=""
+                                                       class="_11xjFby3Le N=a:tab.detail"
+                                                       role="menuitem" aria-current="true">상세정보</a></li>
+        <li class="_1k5R-niA93" role="presentation"><a href=""
+                                                       class="_11xjFby3Le N=a:tab.review"
+                                                       role="menuitem" aria-current="false">리뷰<span
+          class="_3HJHJjSrNK">37</span></a></li>
+        <li class="_1k5R-niA93" role="presentation"><a href="" class="_11xjFby3Le N=a:tab.qna"
+                                                       role="menuitem" aria-current="false">Q&amp;A<span
+          class="_3HJHJjSrNK">0</span></a></li>
+        <li class="_1k5R-niA93" role="presentation"><a href=""
+                                                       class="_11xjFby3Le N=a:tab.refund"
+                                                       role="menuitem" aria-current="false">반품/교환정보</a></li>
+      </ul>
+    </div>
+    <div id="INTRODUCE">
+      <div class="E-N5zuAehq detail_viewer">
+        <div class="attribute_wrapper">
+          <div class="_34LcIArKnw" style="margin-top: 30px; margin-bottom: 40px;"><strong
+            class="_3ZUdtx9GtU">상품정보</strong>
+            <div class="_2E4i2Scsp4 _copyable">
+              <table class="_1_UiXWHt__">
+                <caption class="kOqCtyOcXE"><span class="blind"></span></caption>
+                <colgroup>
+                  <col width="160">
+                  <col>
+                  <col width="160">
+                  <col>
+                </colgroup>
+                <tbody>
+                <tr>
+                  <th scope="row" class="_1iuv6pLHMD">상품번호</th>
+                  <td colspan="1" class="ABROiEshTD"><b>5241417788</b></td>
+                  <th scope="row" class="_1iuv6pLHMD">상품상태</th>
+                  <td colspan="1" class="ABROiEshTD">신상품</td>
+                </tr>
+                <tr>
+                  <th scope="row" class="_1iuv6pLHMD">제조사</th>
+                  <td colspan="1" class="ABROiEshTD">신선한포크</td>
+                  <th scope="row" class="_1iuv6pLHMD">브랜드</th>
+                  <td colspan="1" class="ABROiEshTD">신선한포크</td>
+                </tr>
+                <tr>
+                  <th scope="row" class="_1iuv6pLHMD">모델명</th>
+                  <td colspan="1" class="ABROiEshTD">신선한포크 목살</td>
+                  <th scope="row" class="_1iuv6pLHMD">이벤트</th>
+                  <td colspan="1" class="ABROiEshTD">첫구매고객 5% 할인쿠폰증정!</td>
+                </tr>
+                <tr>
+                  <th scope="row" class="_1iuv6pLHMD">원산지</th>
+                  <td colspan="3" class="ABROiEshTD">국산</td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="_2wtHBKC0qy">상품정보 관련 문의사항은 <a href="javascript:void(0)"
+                                                    class="_3g3llGDI10">Q&amp;A</a>에
+              남겨주세요.</p>
+            <div class="detail_attributes" style="margin-top: 14px;">
+              <div class="_2E4i2Scsp4 _copyable">
+                <table class="_1_UiXWHt__">
+                  <caption class="kOqCtyOcXE"><span class="blind"></span></caption>
+                  <colgroup>
+                    <col width="160">
+                    <col>
+                    <col width="160">
+                    <col>
+                  </colgroup>
+                  <tbody>
+                  <tr>
+                    <th scope="row" class="_1iuv6pLHMD">용도</th>
+                    <td colspan="1" class="ABROiEshTD">구이용</td>
+                    <th scope="row" class="_1iuv6pLHMD">부위</th>
+                    <td colspan="1" class="ABROiEshTD">목심</td>
+                  </tr>
+                  <tr>
+                    <th scope="row" class="_1iuv6pLHMD">중량</th>
+                    <td colspan="3" class="ABROiEshTD">450g</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="_3EFpctgsdH">
+              <table class="euyKo2L1GK">
+                <caption class="_1fu3I9aWYz"><span class="blind">상품정보</span></caption>
+                <colgroup>
+                  <col width="160">
+                  <col>
+                </colgroup>
+                <tbody>
+                <tr>
+                  <th scope="row" class="_2NHlAf7nlw">영수증발급</th>
+                  <td colspan="3" class="_1JIaLFvtK4">
+                    <div>신용카드전표, 현금영수증발급</div>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row" class="_2NHlAf7nlw">A/S 안내</th>
+                  <td colspan="3" class="_1JIaLFvtK4">
+                    <div>1544-5601</div>
+                    <div>제품에 대한 변질이나 문의는 고객센터로 연락주시면 됩니다.<br>상담시간 (월~금)<br>평일 09:00~17:30 / 점심시간
+                      12:00~13:00
+                    </div>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="_9F9CWn02VE" style="margin-bottom: 24px;">
+            <div class="editor_wrap se_smartstore_wrap">
+              <div>
+                <div class="se-viewer se-theme-default" lang="ko-KR">
+                  <!-- SE_DOC_HEADER_START -->
+                  <!--@CONTENTS_HEADER-->
+                  <!-- SE_DOC_HEADER_END -->
+                  <div class="se-main-container">
+                    <div class="se-component se-image se-l-default"
+                         id="SE-649fa891-11df-4898-86e2-f3e6631e0b68">
+                      <div class="se-component-content se-component-content-fit">
+                        <div class="se-section se-section-image se-l-default se-section-align-">
+
+                          <div class="se-module se-module-image" style="">
+                            <a class="se-module-image-link __se_image_link __se_link"
+                               style=""
+                               onclick="return false;" data-linktype="img"
+                               data-linkdata="{&quot;id&quot;:&quot;SE-649fa891-11df-4898-86e2-f3e6631e0b68&quot;,&quot;src&quot;:&quot;https://shop-phinf.pstatic.net/20210702_90/1625209983621cPT66_JPEG/%EC%A0%9C%EB%AA%A9%EC%9D%84_%EC%9E%85%EB%A0%A5%ED%95%B4%EC%A3%BC%EC%84%B8%EC%9A%94.-001_(16).jpg&quot;,&quot;originalWidth&quot;:&quot;860&quot;,&quot;originalHeight&quot;:&quot;860&quot;,&quot;linkUse&quot;:&quot;false&quot;,&quot;link&quot;:&quot;&quot;}"
+                               area-hidden="true">
+                              <img
+                                src="https://shop-phinf.pstatic.net/20210702_90/1625209983621cPT66_JPEG/%EC%A0%9C%EB%AA%A9%EC%9D%84_%EC%9E%85%EB%A0%A5%ED%95%B4%EC%A3%BC%EC%84%B8%EC%9A%94.-001_(16).jpg?type=w860"
+                                data-src="https://shop-phinf.pstatic.net/20210702_90/1625209983621cPT66_JPEG/%EC%A0%9C%EB%AA%A9%EC%9D%84_%EC%9E%85%EB%A0%A5%ED%95%B4%EC%A3%BC%EC%84%B8%EC%9A%94.-001_(16).jpg?type=w860"
+                                alt="" class="se-image-resource">
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="se-component se-image se-l-default"
+                         id="SE-f3bdb9fd-380c-46df-bdb6-8924e784698e">
+                      <div class="se-component-content se-component-content-fit">
+                        <div class="se-section se-section-image se-l-default se-section-align-">
+
+                          <div class="se-module se-module-image" style="">
+                            <a class="se-module-image-link __se_image_link __se_link"
+                               style=""
+                               onclick="return false;" data-linktype="img"
+                               data-linkdata="{&quot;id&quot;:&quot;SE-f3bdb9fd-380c-46df-bdb6-8924e784698e&quot;,&quot;src&quot;:&quot;https://shop-phinf.pstatic.net/20210629_236/1624940480738Lm54q_JPEG/%EB%AA%A9%EC%82%B41%EB%B2%88.jpg&quot;,&quot;originalWidth&quot;:&quot;860&quot;,&quot;originalHeight&quot;:&quot;7328&quot;,&quot;linkUse&quot;:&quot;false&quot;,&quot;link&quot;:&quot;&quot;}"
+                               area-hidden="true">
+                              <img
+                                src="https://shop-phinf.pstatic.net/20210629_236/1624940480738Lm54q_JPEG/%EB%AA%A9%EC%82%B41%EB%B2%88.jpg?type=w860"
+                                data-src="https://shop-phinf.pstatic.net/20210629_236/1624940480738Lm54q_JPEG/%EB%AA%A9%EC%82%B41%EB%B2%88.jpg?type=w860"
+                                alt="" class="se-image-resource">
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="se-component se-image se-l-default"
+                         id="SE-c95d8be0-13fe-49f2-83c0-cb7ad2a6dcf1">
+                      <div class="se-component-content se-component-content-fit">
+                        <div class="se-section se-section-image se-l-default se-section-align-">
+
+                          <div class="se-module se-module-image" style="">
+                            <a class="se-module-image-link __se_image_link __se_link"
+                               style=""
+                               onclick="return false;" data-linktype="img"
+                               data-linkdata="{&quot;id&quot;:&quot;SE-c95d8be0-13fe-49f2-83c0-cb7ad2a6dcf1&quot;,&quot;src&quot;:&quot;https://shop-phinf.pstatic.net/20210629_193/1624940497180sxLCf_JPEG/06.28_2%EB%B2%88.jpg&quot;,&quot;originalWidth&quot;:&quot;860&quot;,&quot;originalHeight&quot;:&quot;3048&quot;,&quot;linkUse&quot;:&quot;false&quot;,&quot;link&quot;:&quot;&quot;}"
+                               area-hidden="true">
+                              <img
+                                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+ip1sAAAAASUVORK5CYII="
+                                data-src="https://shop-phinf.pstatic.net/20210629_193/1624940497180sxLCf_JPEG/06.28_2%EB%B2%88.jpg?type=w860"
+                                alt="" class="se-image-resource">
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="se-component se-image se-l-default"
+                         id="SE-8afb69ef-e6c8-4a29-9a8d-17b50358e88d">
+                      <div class="se-component-content se-component-content-fit">
+                        <div class="se-section se-section-image se-l-default se-section-align-">
+
+                          <div class="se-module se-module-image" style="">
+                            <a class="se-module-image-link __se_image_link __se_link"
+                               style=""
+                               onclick="return false;" data-linktype="img"
+                               data-linkdata="{&quot;id&quot;:&quot;SE-8afb69ef-e6c8-4a29-9a8d-17b50358e88d&quot;,&quot;src&quot;:&quot;https://shop-phinf.pstatic.net/20210629_236/1624940505484MVps6_JPEG/%EB%B0%B0%EC%86%A1%EC%9D%BC%EC%A7%80%EC%A0%95.jpg&quot;,&quot;originalWidth&quot;:&quot;860&quot;,&quot;originalHeight&quot;:&quot;920&quot;,&quot;linkUse&quot;:&quot;false&quot;,&quot;link&quot;:&quot;&quot;}"
+                               area-hidden="true">
+                              <img
+                                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+ip1sAAAAASUVORK5CYII="
+                                data-src="https://shop-phinf.pstatic.net/20210629_236/1624940505484MVps6_JPEG/%EB%B0%B0%EC%86%A1%EC%9D%BC%EC%A7%80%EC%A0%95.jpg?type=w860"
+                                alt="" class="se-image-resource">
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="se-component se-image se-l-default"
+                         id="SE-b33f6876-6e40-4e43-9f6a-a4b4eb411805">
+                      <div class="se-component-content se-component-content-fit">
+                        <div class="se-section se-section-image se-l-default se-section-align-">
+
+                          <div class="se-module se-module-image" style="">
+                            <a class="se-module-image-link __se_image_link __se_link"
+                               style=""
+                               onclick="return false;" data-linktype="img"
+                               data-linkdata="{&quot;id&quot;:&quot;SE-b33f6876-6e40-4e43-9f6a-a4b4eb411805&quot;,&quot;src&quot;:&quot;https://shop-phinf.pstatic.net/20210629_140/1624940511051Aohfu_JPEG/2021_%EC%9D%B8%ED%8A%B8%EB%A1%9C(%EC%9D%B8%EC%82%AC%EB%A7%90).jpg&quot;,&quot;originalWidth&quot;:&quot;860&quot;,&quot;originalHeight&quot;:&quot;944&quot;,&quot;linkUse&quot;:&quot;false&quot;,&quot;link&quot;:&quot;&quot;}"
+                               area-hidden="true">
+                              <img
+                                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+ip1sAAAAASUVORK5CYII="
+                                data-src="https://shop-phinf.pstatic.net/20210629_140/1624940511051Aohfu_JPEG/2021_%EC%9D%B8%ED%8A%B8%EB%A1%9C(%EC%9D%B8%EC%82%AC%EB%A7%90).jpg?type=w860"
+                                alt="" class="se-image-resource">
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="se-component se-image se-l-default"
+                         id="SE-82c53639-aad1-47c7-96b4-cb5dec120a95">
+                      <div class="se-component-content se-component-content-fit">
+                        <div class="se-section se-section-image se-l-default se-section-align-">
+
+                          <div class="se-module se-module-image" style="">
+                            <a class="se-module-image-link __se_image_link __se_link"
+                               style=""
+                               onclick="return false;" data-linktype="img"
+                               data-linkdata="{&quot;id&quot;:&quot;SE-82c53639-aad1-47c7-96b4-cb5dec120a95&quot;,&quot;src&quot;:&quot;https://shop-phinf.pstatic.net/20210629_225/1624940673223G6zXu_JPEG/%EB%AA%A9%EC%82%B43%EB%B2%88.jpg&quot;,&quot;originalWidth&quot;:&quot;860&quot;,&quot;originalHeight&quot;:&quot;2183&quot;,&quot;linkUse&quot;:&quot;false&quot;,&quot;link&quot;:&quot;&quot;}"
+                               area-hidden="true">
+                              <img
+                                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+ip1sAAAAASUVORK5CYII="
+                                data-src="https://shop-phinf.pstatic.net/20210629_225/1624940673223G6zXu_JPEG/%EB%AA%A9%EC%82%B43%EB%B2%88.jpg?type=w860"
+                                alt="" class="se-image-resource">
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="se-component se-image se-l-default"
+                         id="SE-ee4bfb79-92ac-44f6-9a57-5721637e946f">
+                      <div class="se-component-content se-component-content-fit">
+                        <div class="se-section se-section-image se-l-default se-section-align-">
+
+                          <div class="se-module se-module-image" style="">
+                            <a class="se-module-image-link __se_image_link __se_link"
+                               style=""
+                               onclick="return false;" data-linktype="img"
+                               data-linkdata="{&quot;id&quot;:&quot;SE-ee4bfb79-92ac-44f6-9a57-5721637e946f&quot;,&quot;src&quot;:&quot;https://shop-phinf.pstatic.net/20210629_271/1624948250478TKBV6_JPEG/%ED%95%9C%EC%9E%85%EB%AA%A9%EC%82%B4.jpg&quot;,&quot;originalWidth&quot;:&quot;860&quot;,&quot;originalHeight&quot;:&quot;2377&quot;,&quot;linkUse&quot;:&quot;false&quot;,&quot;link&quot;:&quot;&quot;}"
+                               area-hidden="true">
+                              <img
+                                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+ip1sAAAAASUVORK5CYII="
+                                data-src="https://shop-phinf.pstatic.net/20210629_271/1624948250478TKBV6_JPEG/%ED%95%9C%EC%9E%85%EB%AA%A9%EC%82%B4.jpg?type=w860"
+                                alt="" class="se-image-resource">
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="se-component se-image se-l-default"
+                         id="SE-312653f1-38ff-4642-a403-0b54cf576f8b">
+                      <div class="se-component-content se-component-content-fit">
+                        <div class="se-section se-section-image se-l-default se-section-align-">
+
+                          <div class="se-module se-module-image" style="">
+                            <a class="se-module-image-link __se_image_link __se_link"
+                               style=""
+                               onclick="return false;" data-linktype="img"
+                               data-linkdata="{&quot;id&quot;:&quot;SE-312653f1-38ff-4642-a403-0b54cf576f8b&quot;,&quot;src&quot;:&quot;https://shop-phinf.pstatic.net/20210630_103/1625022341238a3Rdm_JPEG/4-1%EB%B2%88.jpg&quot;,&quot;originalWidth&quot;:&quot;860&quot;,&quot;originalHeight&quot;:&quot;1144&quot;,&quot;linkUse&quot;:&quot;false&quot;,&quot;link&quot;:&quot;&quot;}"
+                               area-hidden="true">
+                              <img
+                                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+ip1sAAAAASUVORK5CYII="
+                                data-src="https://shop-phinf.pstatic.net/20210630_103/1625022341238a3Rdm_JPEG/4-1%EB%B2%88.jpg?type=w860"
+                                alt="" class="se-image-resource">
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="se-component se-image se-l-default"
+                         id="SE-294dd925-3ac1-4b3c-8932-17dcd58777fe">
+                      <div class="se-component-content se-component-content-fit">
+                        <div class="se-section se-section-image se-l-default se-section-align-">
+
+                          <div class="se-module se-module-image" style="">
+                            <a class="se-module-image-link __se_image_link __se_link"
+                               style=""
+                               onclick="return false;" data-linktype="img"
+                               data-linkdata="{&quot;id&quot;:&quot;SE-294dd925-3ac1-4b3c-8932-17dcd58777fe&quot;,&quot;src&quot;:&quot;https://shop-phinf.pstatic.net/20210630_282/1625022362446qo7BG_GIF/%EC%8A%A4%ED%82%A8%ED%8F%AC%EC%9E%A5.gif&quot;,&quot;originalWidth&quot;:&quot;479&quot;,&quot;originalHeight&quot;:&quot;315&quot;,&quot;linkUse&quot;:&quot;false&quot;,&quot;link&quot;:&quot;&quot;}"
+                               area-hidden="true">
+                              <img
+                                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+ip1sAAAAASUVORK5CYII="
+                                data-src="https://shop-phinf.pstatic.net/20210630_282/1625022362446qo7BG_GIF/%EC%8A%A4%ED%82%A8%ED%8F%AC%EC%9E%A5.gif?type=wg860"
+                                alt="" class="se-image-resource">
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="se-component se-image se-l-default"
+                         id="SE-047b5937-16da-4bf8-890d-fdd1cd9bf573">
+                      <div class="se-component-content se-component-content-fit">
+                        <div class="se-section se-section-image se-l-default se-section-align-">
+
+                          <div class="se-module se-module-image" style="">
+                            <a class="se-module-image-link __se_image_link __se_link"
+                               style=""
+                               onclick="return false;" data-linktype="img"
+                               data-linkdata="{&quot;id&quot;:&quot;SE-047b5937-16da-4bf8-890d-fdd1cd9bf573&quot;,&quot;src&quot;:&quot;https://shop-phinf.pstatic.net/20210630_211/1625022372199hg7hD_JPEG/4-2%EB%B2%88.jpg&quot;,&quot;originalWidth&quot;:&quot;860&quot;,&quot;originalHeight&quot;:&quot;4858&quot;,&quot;linkUse&quot;:&quot;false&quot;,&quot;link&quot;:&quot;&quot;}"
+                               area-hidden="true">
+                              <img
+                                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+ip1sAAAAASUVORK5CYII="
+                                data-src="https://shop-phinf.pstatic.net/20210630_211/1625022372199hg7hD_JPEG/4-2%EB%B2%88.jpg?type=w860"
+                                alt="" class="se-image-resource">
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="se-component se-image se-l-default"
+                         id="SE-1cd35212-114e-4bb3-a2e1-4ffe2d0523c6">
+                      <div class="se-component-content se-component-content-fit">
+                        <div class="se-section se-section-image se-l-default se-section-align-">
+
+                          <div class="se-module se-module-image" style="">
+                            <a class="se-module-image-link __se_image_link __se_link"
+                               style=""
+                               onclick="return false;" data-linktype="img"
+                               data-linkdata="{&quot;id&quot;:&quot;SE-1cd35212-114e-4bb3-a2e1-4ffe2d0523c6&quot;,&quot;src&quot;:&quot;https://shop-phinf.pstatic.net/20210701_15/1625105277469scFC4_JPEG/%EC%A0%9C%EB%AA%A9%EC%9D%84_%EC%9E%85%EB%A0%A5%ED%95%B4%EC%A3%BC%EC%84%B8%EC%9A%94.-001_(11).jpg&quot;,&quot;originalWidth&quot;:&quot;860&quot;,&quot;originalHeight&quot;:&quot;860&quot;,&quot;linkUse&quot;:&quot;false&quot;,&quot;link&quot;:&quot;&quot;}"
+                               area-hidden="true">
+                              <img
+                                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+ip1sAAAAASUVORK5CYII="
+                                data-src="https://shop-phinf.pstatic.net/20210701_15/1625105277469scFC4_JPEG/%EC%A0%9C%EB%AA%A9%EC%9D%84_%EC%9E%85%EB%A0%A5%ED%95%B4%EC%A3%BC%EC%84%B8%EC%9A%94.-001_(11).jpg?type=w860"
+                                alt="" class="se-image-resource">
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="se-component se-text se-l-default"
+                         id="SE-2ec5f565-d201-4498-9caa-2a0290f38d21">
+                      <div class="se-component-content">
+                        <div class="se-section se-section-text se-l-default">
+                          <div class="se-module se-module-text">
+
+                            <!-- SE-TEXT { --><p
+                            class="se-text-paragraph se-text-paragraph-align-center "
+                            style=""
+                            id="SE-f8958272-bfe5-42bf-8a14-3d6d402b51fd"><span
+                            style="" class="se-fs- se-ff-   "
+                            id="SE-d4f7224e-d0de-4c26-b0ad-fd0c5b52ca73">&ZeroWidthSpace;</span>
+                          </p><!-- } SE-TEXT -->
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="se-360vr-fullscreen"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="jqaBjC05ww" style="margin-top: 21px; margin-bottom: 19px; padding-bottom: 3px;"><strong
+          class="_3e2deBEXeI">관련 태그</strong>
+          <ul class="_3Vox1DKZiA">
+            <li class="_2RkVi-H2ze N=a:itm.tag"><a class="_3SMi-TrYq2"
+                                                   href="/freshpork/search?q=%23%EB%A7%9B%EC%9E%88%EB%8A%94%EB%AA%A9%EC%82%B4">#맛있는목살</a>
+            </li>
+            <li class="_2RkVi-H2ze N=a:itm.tag"><a class="_3SMi-TrYq2"
+                                                   href="/freshpork/search?q=%23%ED%86%B5%EB%AA%A9%EC%82%B4">#통목살</a>
+            </li>
+            <li class="_2RkVi-H2ze N=a:itm.tag"><a class="_3SMi-TrYq2"
+                                                   href="/freshpork/search?q=%23%EB%8F%BC%EC%A7%80%EB%AA%A9%EC%82%B4">#돼지목살</a>
+            </li>
+            <li class="_2RkVi-H2ze N=a:itm.tag"><a class="_3SMi-TrYq2"
+                                                   href="/freshpork/search?q=%2330%EB%8C%80">#30대</a>
+            </li>
+            <li class="_2RkVi-H2ze N=a:itm.tag"><a class="_3SMi-TrYq2"
+                                                   href="/freshpork/search?q=%2340%EB%8C%80">#40대</a>
+            </li>
+            <li class="_2RkVi-H2ze N=a:itm.tag"><a class="_3SMi-TrYq2"
+                                                   href="/freshpork/search?q=%23%EC%BA%A0%ED%95%91%EA%B3%A0%EA%B8%B0">#캠핑고기</a>
+            </li>
+            <li class="_2RkVi-H2ze N=a:itm.tag"><a class="_3SMi-TrYq2"
+                                                   href="/freshpork/search?q=%23%ED%95%9C%EB%8F%88">#한돈</a>
+            </li>
+            <li class="_2RkVi-H2ze N=a:itm.tag"><a class="_3SMi-TrYq2"
+                                                   href="/freshpork/search?q=%23%EC%B2%AD%EC%A0%95%EC%A7%80%EC%97%AD">#청정지역</a>
+            </li>
+            <li class="_2RkVi-H2ze N=a:itm.tag"><a class="_3SMi-TrYq2"
+                                                   href="/freshpork/search?q=%23%EC%8B%A0%EC%84%A0%ED%95%9C%EA%B3%A0%EA%B8%B0">#신선한고기</a>
+            </li>
+            <li class="_2RkVi-H2ze N=a:itm.tag"><a class="_3SMi-TrYq2"
+                                                   href="/freshpork/search?q=%23%EB%A7%9B%EC%9E%88%EB%8A%94">#맛있는</a>
+            </li>
+          </ul>
+        </div>
+        <div class="product_info_notice">
+          <div class="_2E4i2Scsp4 _copyable" style="margin-top: 30px; margin-bottom: 60px;"><strong
+            class="_4MkjXBK5Ox">상품정보 제공고시</strong>
+            <table class="_1_UiXWHt__">
+              <caption class="kOqCtyOcXE"><span class="blind">상품정보 제공고시</span></caption>
+              <colgroup>
+                <col width="160">
+                <col>
+              </colgroup>
+              <tbody>
+              <tr>
+                <th scope="row" class="_1iuv6pLHMD">품목 또는 명칭</th>
+                <td colspan="1" class="ABROiEshTD">상품상세참조</td>
+              </tr>
+              <tr>
+                <th scope="row" class="_1iuv6pLHMD">포장단위별 용량(중량), 수량, 크기</th>
+                <td colspan="1" class="ABROiEshTD">
+                  <table cellspacing="0" class="_2agvmVqZjq">
+                    <caption class="kOqCtyOcXE"><span class="blind">상품정보 제공고시</span></caption>
+                    <colgroup>
+                      <col width="221">
+                      <col>
+                    </colgroup>
+                    <tbody>
+                    <tr>
+                      <th scope="row" class="_1iuv6pLHMD">포장단위별 용량(중량), 수량, 크기</th>
+                      <td class="ABROiEshTD">상품상세참조</td>
+                    </tr>
+                    <tr>
+                      <th scope="row" class="_1iuv6pLHMD">포장단위별 수량</th>
+                      <td class="ABROiEshTD">상품상세참조</td>
+                    </tr>
+                    <tr>
+                      <th scope="row" class="_1iuv6pLHMD">포장단위별 크기</th>
+                      <td class="ABROiEshTD">상품상세참조</td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row" class="_1iuv6pLHMD">제조연월일, 유통기한 또는 품질유지기한</th>
+                <td colspan="1" class="ABROiEshTD">
+                  <table cellspacing="0" class="_2agvmVqZjq">
+                    <caption class="kOqCtyOcXE"><span class="blind">상품정보 제공고시</span></caption>
+                    <colgroup>
+                      <col width="221">
+                      <col>
+                    </colgroup>
+                    <tbody>
+                    <tr>
+                      <th scope="row" class="_1iuv6pLHMD">제조연월일(포장일 또는 생산연도)</th>
+                      <td class="ABROiEshTD">상품상세참조</td>
+                    </tr>
+                    <tr>
+                      <th scope="row" class="_1iuv6pLHMD">유통기한 또는 품질유지기한</th>
+                      <td class="ABROiEshTD">상품상세참조</td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row" class="_1iuv6pLHMD">원산지</th>
+                <td colspan="1" class="ABROiEshTD">국산</td>
+              </tr>
+              <tr>
+                <th scope="row" class="_1iuv6pLHMD">생산자</th>
+                <td colspan="1" class="ABROiEshTD">상품상세참조</td>
+              </tr>
+              <tr>
+                <th scope="row" class="_1iuv6pLHMD">관련법상 표시사항</th>
+                <td colspan="1" class="ABROiEshTD">상품상세참조</td>
+              </tr>
+              <tr>
+                <th scope="row" class="_1iuv6pLHMD">상품구성</th>
+                <td colspan="1" class="ABROiEshTD">상품상세참조</td>
+              </tr>
+              <tr>
+                <th scope="row" class="_1iuv6pLHMD">보관방법 또는 취급방법</th>
+                <td colspan="1" class="ABROiEshTD">상품상세참조</td>
+              </tr>
+              <tr>
+                <th scope="row" class="_1iuv6pLHMD">식품 등의 표시·광고에 관한 법률에 따른 소비자안전을 위한 주의사항</th>
+                <td colspan="1" class="ABROiEshTD">상품상세참조</td>
+              </tr>
+              <tr>
+                <th scope="row" class="_1iuv6pLHMD">소비자 상담 관련 전화번호</th>
+                <td colspan="1" class="ABROiEshTD">상품상세참조</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="trade_terms_info">
+          <div class="_2E4i2Scsp4 _copyable" style="margin-top: 30px; margin-bottom: 60px;"><strong
+            class="_4MkjXBK5Ox">거래조건에 관한 정보</strong>
+            <table class="_1_UiXWHt__">
+              <caption class="kOqCtyOcXE"><span class="blind">거래조건에 관한 정보</span></caption>
+              <colgroup>
+                <col width="345">
+                <col>
+              </colgroup>
+              <tbody>
+              <tr>
+                <th scope="row" class="_1iuv6pLHMD">재화등의 배송방법에 관한 정보</th>
+                <td colspan="1" class="ABROiEshTD">택배</td>
+              </tr>
+              <tr>
+                <th scope="row" class="_1iuv6pLHMD">주문 이후 예상되는 배송기간</th>
+                <td colspan="1" class="ABROiEshTD">대금 지급일로부터 3일 이내에 발송</td>
+              </tr>
+              <tr>
+                <th scope="row" class="_1iuv6pLHMD">제품하자·오배송 등에 따른 청약철회 등의 경우 청약철회 등을 할 수 있는 기간 및
+                  통신판매업자가
+                  부담하는 반품비용 등에 관한 정보
+                </th>
+                <td colspan="1" class="ABROiEshTD">전자상거래등에서의소비자보호에관한법률 등에 의한 제품의 하자 또는 오배송 등으로 인한
+                  청약철회의
+                  경우에는
+                  상품 수령 후 3개월 이내, 그 사실을 안 날 또는 알 수 있었던 날로부터 30일 이내에 청약철회를 할 수 있으며, 반품 비용은 통신판매업자가
+                  부담합니다.
+                </td>
+              </tr>
+              <tr>
+                <th scope="row" class="_1iuv6pLHMD">제품하자가 아닌 소비자의 단순변심, 착오구매에 따른 청약철회 시 소비자가 부담하는
+                  반품비용
+                  등에 관한
+                  정보
+                </th>
+                <td colspan="1" class="ABROiEshTD">편도 3500원 (최초 배송비 무료인 경우 7000원 부과)</td>
+              </tr>
+              <tr>
+                <th scope="row" class="_1iuv6pLHMD">제품하자가 아닌 소비자의 단순변심, 착오구매에 따른 청약철회가 불가능한 경우 그 구체적
+                  사유와
+                  근거
+                </th>
+                <td colspan="1" class="ABROiEshTD">전자상거래등에서의소비자보호에관한법률 등에 의한 청약철회 제한 사유에 해당하는 경우 및
+                  기타
+                  객관적으로
+                  이에 준하는 것으로 인정되는 경우 청약철회가 제한될 수 있습니다.
+                </td>
+              </tr>
+              <tr>
+                <th scope="row" class="_1iuv6pLHMD">재화등의 교환·반품·보증 조건 및 품질보증기준</th>
+                <td colspan="1" class="ABROiEshTD">소비자분쟁해결기준(공정거래위원회 고시) 및 관계법령에 따릅니다.</td>
+              </tr>
+              <tr>
+                <th scope="row" class="_1iuv6pLHMD">재화등의 A/S 관련 전화번호</th>
+                <td colspan="1" class="ABROiEshTD">1544-5601</td>
+              </tr>
+              <tr>
+                <th scope="row" class="_1iuv6pLHMD">대금을 환불받기 위한 방법과 환불이 지연될 경우 지연에 따른 배상금을 지급받을 수
+                  있다는 사실
+                  및
+                  배상금 지급의 구체적 조건 및 절차
+                </th>
+                <td colspan="1" class="ABROiEshTD">주문취소 및 대금의 환불은 네이버 페이 마이페이지에서 신청할 수 있으며, 전자상거래
+                  등에서의
+                  소비자보호에 관한 법률에 따라 소비자의 청약철회 후 판매자가 재화 등을 반환 받은 날로부터 3영업일 이내에 지급받은 대금의 환급을 정당한 사유
+                  없이
+                  지연하는
+                  때에는 소비자는 지연기간에 대해서 연 20%의 지연배상금을 판매자에게 청구할 수 있습니다.
+                </td>
+              </tr>
+              <tr>
+                <th scope="row" class="_1iuv6pLHMD">소비자피해보상의 처리, 재화등에 대한 불만 처리 및 소비자와 사업자 사이의 분쟁처리에
+                  관한
+                  사항
+                </th>
+                <td colspan="1" class="ABROiEshTD">소비자분쟁해결기준(공정거래위원회 고시) 및 관계법령에 따릅니다.</td>
+              </tr>
+              <tr>
+                <th scope="row" class="_1iuv6pLHMD">거래에 관한 약관의 내용 또는 확인할 수 있는 방법</th>
+                <td colspan="1" class="ABROiEshTD">상품상세 페이지 및 페이지 하단의 이용약관 링크를 통해 확인할 수 있습니다.</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="QNA">
+      <div class="_1t0Ks-Zj9a" style="margin-top: 100px;"><h3 class="_2uwATZc0dQ">Q&amp;A</h3>
+        <p class="_2wbE9P9G99">구매하시려는 상품에 대해 궁금한 점이 있으신 경우 문의해주세요.
+        <div class="_34qGDmlMhC">
+          <div class="_3qWcfFckGy">
+            <div class="_1boQScHAqW">
+              <a class="_1h8gH51Art N=a:qna.write" role="button"
+                 href="javascript:void(0)">상품 Q&amp;A 작성하기</a>
+              <a class="_1h8gH51Art _228Dp2q_V1 N=a:qna.ask" role="button"
+                 href="https://shopping.naver.com/my/qna" target="_blank">나의 Q&amp;A 조회</a>
+            </div>
+            <div class="_1EBATzPCa8">
+              <div class="_3FQQRFaeIW">
+                <input type="checkbox" class="_1f6xbtwIMw blind N=a:qna.my"
+                       id="qnaSwitch" readonly="">
+                <label class="_1OvvxU6rXs" for="qnaSwitch">
+                  <span class="PbwhXtcSRA">내 Q&amp;A 보기</span>
+                  <i class="_1g_dmzOZvr">
+                    <span class="blind">OFF</span>
+                  </i>
+                </label>
+              </div>
+              <div class="_5edDnI76eM">
+                <a class="_1OvvxU6rXs" href="javascript:void(0)" role="button"
+                   aria-expanded="false" aria-haspopup="listbox"
+                   aria-label="필터를 선택하세요">답변상태</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="RETURNPOLICY">
+        <div class="_3jNVG_4Jzx" style="margin-top: 100px;"><h3 class="zRVNb6dB4r">반품/교환정보</h3>
+          <div class="_3fo1LVWEJ2"><strong class="_2EAFR9-ybO">신선한포크 반품/교환 안내</strong>
+            <p class="JLs3Oq1GKG">반품 시 먼저 판매자와 연락하셔서 반품사유, 택배사, 배송비, 반품지 주소 등을 협의하신 후 반품상품을 발송해 주시기
+              바랍니다.</p>
+          </div>
+          <table cellspacing="0" class="-SPZfRz-75">
+            <caption class="_1Lu6l5Y6v4"><span class="blind">반품/교환 안내</span></caption>
+            <colgroup>
+              <col width="150">
+              <col width="410">
+              <col width="150">
+              <col>
+            </colgroup>
+            <tbody>
+            <tr>
+              <th scope="row" class="_26vaxpmgvN">판매자 지정택배사</th>
+              <td colspan="3" class="JLs3Oq1GKG">우체국택배</td>
+            </tr>
+            <tr>
+              <th scope="row" class="_26vaxpmgvN">반품배송비</th>
+              <td class="JLs3Oq1GKG">편도 3,500원 (최초 배송비 무료인 경우 7,000원 부과)</td>
+              <th scope="row" class="_26vaxpmgvN">교환배송비</th>
+              <td class="JLs3Oq1GKG">7,000원</td>
+            </tr>
+            <tr>
+              <th scope="row" class="_26vaxpmgvN">보내실 곳</th>
+              <td colspan="3" class="JLs3Oq1GKG">점포 주소</td>
+            </tr>
+            <tr>
+              <th scope="row" rowspan="2" class="_26vaxpmgvN">반품/교환 사유에 따른 요청 가능 기간</th>
+              <td colspan="3" class="JLs3Oq1GKG">구매자 단순 변심은 상품 수령 후 7일 이내 <span
+                class="_3OXYkEjCxo">(구매자 반품배송비 부담)</span></td>
+            </tr>
+            <tr>
+              <td colspan="3" class="JLs3Oq1GKG">표시/광고와 상이, 상품하자의 경우 상품 수령 후 3개월 이내 혹은 표시/광고와 다른 사실을 안
+                날로부터
+                30일 이내
+                <span class="_3OXYkEjCxo">(판매자 반품 배송비 부담)</span><br>둘 중 하나 경과 시 반품/교환 불가
+              </td>
+            </tr>
+            <tr>
+              <th scope="row" rowspan="7" class="_26vaxpmgvN">반품/교환 불가능 사유</th>
+              <td colspan="3" class="JLs3Oq1GKG">
+                <ul class="_1KgmaRlDnI">
+                  <li class="_2VsRrv9CHS"><span class="_18irp6aLGm">1.</span>반품요청기간이 지난 경우</li>
+                  <li class="_2VsRrv9CHS"><span class="_18irp6aLGm">2.</span>구매자의 책임 있는 사유로 상품 등이
+                    멸실
+                    또는
+                    훼손된 경우
+                    <span class="_3OXYkEjCxo">(단, 상품의 내용을 확인하기 위하여 포장 등을 훼손한 경우는 제외)</span></li>
+                  <li class="_2VsRrv9CHS"><span class="_18irp6aLGm">3.</span>구매자의 책임있는 사유로 포장이
+                    훼손되어 상품
+                    가치가
+                    현저히
+                    상실된 경우 <span class="_3OXYkEjCxo">(예: 식품, 화장품, 향수류, 음반 등)</span></li>
+                  <li class="_2VsRrv9CHS"><span class="_18irp6aLGm">4.</span>구매자의 사용 또는 일부 소비에 의하여
+                    상품의
+                    가치가
+                    현저히
+                    감소한 경우 <span class="_3OXYkEjCxo">(라벨이 떨어진 의류 또는 태그가 떨어진 명품관 상품인 경우)</span>
+                  </li>
+                  <li class="_2VsRrv9CHS"><span class="_18irp6aLGm">5.</span>시간의 경과에 의하여 재판매가 곤란할
+                    정도로
+                    상품
+                    등의
+                    가치가 현저히 감소한 경우
+                  </li>
+                  <li class="_2VsRrv9CHS"><span class="_18irp6aLGm">6.</span>고객의 요청사항에 맞춰 제작에 들어가는
+                    맞춤제작상품의
+                    경우
+                    <span class="_3OXYkEjCxo">(판매자에게 회복불가능한 손해가 예상되고, 그러한 예정으로 청약철회권 행사가 불가하다는 사실을 서면 동의 받은 경우)</span>
+                  </li>
+                  <li class="_2VsRrv9CHS"><span class="_18irp6aLGm">7.</span>복제가 가능한 상품 등의 포장을 훼손한
+                    경우
+                    <span
+                      class="_3OXYkEjCxo">(CD/DVD/GAME/도서의 경우 포장 개봉 시)</span></li>
+                </ul>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="etc" style="padding-top: 24px; margin-bottom: 24px;">
+        <div class="_1aH4b0l27f" style="margin-bottom: 23px;">
+          <div class="_211Avwm-sU"><strong class="LsqQaf7pDo">판매자정보</strong>
+            <table cellspacing="0" class="IA34ue2o2i">
+              <caption class="_2Nk29u0bt0"><span class="blind">판매자정보 안내</span></caption>
+              <colgroup>
+                <col width="150">
+                <col width="360">
+                <col width="150">
+                <col>
+              </colgroup>
+              <tbody>
+              <tr>
+                <th scope="row" class="u5Yc0U2D2U">상호명</th>
+                <td class="_3fpUfPAXM5" colspan="1">점포 명</td>
+                <th scope="row" class="u5Yc0U2D2U">대표자</th>
+                <td class="_3fpUfPAXM5">점주 이름</td>
+              </tr>
+              <tr>
+                <th scope="row" class="u5Yc0U2D2U">사업자등록번호</th>
+                <td class="_3fpUfPAXM5" colspan="1">사업자등록번호</td>
+                <th scope="row" class="u5Yc0U2D2U">통신판매업번호</th>
+                <td class="_3fpUfPAXM5">통신판매업번호</td>
+              </tr>
+              <tr>
+                <th scope="row" class="u5Yc0U2D2U">사업장소재지</th>
+                <td colspan="3" class="_3fpUfPAXM5">점포 주소(시장) (메일: <a
+                  href="mailTo:"
+                  class="_2bY0n46Os8">메일주소</a>)
+                  <div class="WIgpnRinBM">고객센터: 1544-0000<span class="_2cX2XqktrY">인증</span><a
+                    href="javascript:void(0)" class="_10BDVNM_8t"><span
+                    class="blind">잘못된 번호 신고</span></a></div>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="_5sQci86lGC" style="margin-bottom: 24px;"><em class="Z8M5w789mW">주의사항</em>
+          <ul class="Lmlj50TxgN">
+            <li class="_2nxp18FkWw _2VeoATJX0C">전자상거래 등에서의 소비자보호에 관한 법률에 의한 반품규정이 판매자가 지정한 반품 조건보다
+              우선합니다.
+            </li>
+            <li class="_2nxp18FkWw">전자상거래 등에서의 소비자보호에 관한 법률에 의거하여 미성년자가 물품을 구매하는 경우, 법정대리인이 동의하지 않으면
+              미성년자 본인
+              또는
+              법정대리인이 구매를 취소할 수 있습니다.
+            </li>
+            <li class="_2nxp18FkWw">전기용품 및 생활용품 안전관리법 및 어린이제품 안전 특별법 규정에 의한 안전관리대상 품목인 전기용품, 생활용품,
+              어린이제품을 판매
+              또는
+              구매하실
+              경우에는 해당 제품이 안전인증, 안전확인, 공급자적합성확인, 안전기준준수 적용 제품인지 확인하시기 바랍니다.
+            </li>
+            <li class="_2nxp18FkWw">결제시스템을 이용하지 않고 판매자와 직접 거래하실 경우 상품을 받지 못하거나 구매한 상품과 상이한 상품을 받는 등 피해가
+              발생할
+              수
+              있으니 유의하시기 바랍니다.
+            </li>
+            <li class="_2nxp18FkWw _1C3dIsrNyg">등록된 판매상품과 상품의 내용은 판매자가 등록한 것으로 미니프로젝트는 등록된 내용에 대하여 일체의
+              책임을
+              지지
+              않습니다.
+            </li>
+          </ul>
+        </div>
+        <div class="_2-VN-pOIhZ" style="margin-bottom: 24px;">
+          <div class="NuTdHLU8Bd">
+            <div class="_3qprLWrXi4">신고센터</div>
+            <p class="_3IpAeJAKjx">미니프로젝트는 소비자의 보호와 사이트의 안전거래를 위해<br>신고센터를 운영하고 있습니다. 안전거래를 저해하는 경우 신고하여
+              주시기
+              바랍니다.
+            </p>
+            <a href="https://help.pay.naver.com/mail/form.nhn?alias=checkout_accuse&amp;productNo=5241417788"
+               target="_blank" class="_2R0NUVapvn N=a:rfd.report" role="button">신고하기</a></div>
+          <div class="NuTdHLU8Bd">
+            <div class="_3qprLWrXi4">지식재산권신고센터</div>
+            <p class="_3IpAeJAKjx">미니프로젝트는 지적재산권 보호를 위해 노력합니다.<br>지식재산권 침해상품이 있을 경우 신고하여 주시기 바랍니다.</p><a
+            href="https://ips.smartstore.naver.com" target="_blank" class="_2R0NUVapvn N=a:rfd.ips"
+            role="button">신고접수하기</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

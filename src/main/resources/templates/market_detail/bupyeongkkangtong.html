@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="common/head"></head>
+
+<body>
+	<script>
+		$(document).ready(function(){
+			$.ajax({
+				url:"http://localhost:8080/market_detail?market=bupyeongkkangtong",
+				method:"POST",
+				dataType:"json",
+				success:function(data){
+					var str = "<div>";
+					var count = 0;
+					$.each(data, function(i, v){
+						if(count%6 == 0){
+							str += "<ul class=\"list-group list-group-horizontal-xxl\">";
+						}
+						str += "<li class=\"list-group-item\">" + v.name + "</li>";
+						if(count%6 == 5){
+							str += "</ul>";
+						}
+						count++;
+					});
+					if(count%6 != 5){
+						str += "</ul>";
+					}
+					str += "</div>";
+					$("#store_list").html(str);
+					
+					
+					var str = "<div>";
+					var count = 0;
+					$.each(data, function(i, v){
+						if(v.products == ""){
+							return true;
+						}
+						if(count%3 == 0){
+							str += "<ul class=\"list-group list-group-horizontal-xxl\">";
+						}
+						str += "<li class=\"list-group-item\">" + v.products + "</li>";
+						if(count%3 == 2){
+							str += "</ul>";
+						}
+						count++;
+					});
+					if(count%3 != 2){
+						str += "</ul>";
+					}
+					str += "</div>";
+					$("#product_list").html(str);
+				}
+				
+				
+			});
+		});
+	</script>
+	<header class="container-fluid text-center" th:replace="common/header"></header>
+	
+	<nav class="navbar navbar-inverse" th:replace="common/nav"></nav>
+
+	<div style="width: 100%;height:100%;">
+		<div class="market_detail_sidebar" th:replace="market_detail/sidebar"></div>
+		
+		<div style="float:left;width:70%;height:100%;margin:20px;">
+			<h1>부평 깡통시장</h1>
+			
+			<ul class="nav nav-tabs" id="myTab" role="tablist">
+				<li class="nav-item" role="presentation">
+					<button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">소개</button>
+				</li>
+				<li class="nav-item" role="presentation">
+					<button class="nav-link" id="store_list-tab" data-bs-toggle="tab" data-bs-target="#store_list" type="submit" role="tab" aria-controls="store_list" aria-selected="false">점포목록</button>
+				</li>
+				<li class="nav-item" role="presentation">
+					<button class="nav-link" id="product_list-tab" data-bs-toggle="tab" data-bs-target="#product_list" type="button" role="tab" aria-controls="product_list" aria-selected="false">품목목록</button>
+				</li>
+				<li class="nav-item" role="presentation">
+					<button class="nav-link" id="direction-tab" data-bs-toggle="tab" data-bs-target="#direction" type="button" role="tab" aria-controls="direction" aria-selected="false">오시는길</button>
+				</li>
+			</ul>
+			<div class="tab-content" id="myTabContent">
+				<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+					<br><h2><strong>소개</strong></h2><hr><br><br>
+					<h3>사거리시장, 부평깡통시장의 첫 발걸음</h3><hr>
+					1890년대 ‘사거리시장’ 이라는 이름으로 부산 중구 부평동에 자리 잡았습니다. 당시 사거리 시장이라는 이름으로 전국에 꽤 알려진 시장이었습니다.<br>
+					1910년 사거리 시장은 20인 이상 영업자 형태의 전국 최초 공설 1호 시장으로 지정되었습니다.<br><br><br><br>
+					<h3>부평깡통시장, 과거 세대와 미래 세대가 공존하는 곳</h3><hr>
+					단일 시장으로는 전국에서 가장 큰 시장이 부평깡통시장입니다. 1일 유동인구만 약 2만 명에 달하는 부평깡통시장은 시설의 현대화사업이 한창 진행되어,<br>
+					아케이드 화 되어있는 구역과 아직 전통 시장의 모습을 간직한 구역으로 나뉘어 있습니다.<br><br>
+					2013년 10월 29일에는 전국 최초로 상설 야시장이 개장되어 부산의 관광명소로 거듭나게 되었고, 볼거리와 먹거리가 풍성한 거리가 조성되었습니다.<br>
+					필리핀, 일본, 베트남 등 세계 각국의 전통요리와 다문화 음식이 있는 가운데, 매주 공연과 형형색색의 조명은 거리를 더욱 아름답게 빛내고 있습니다.<br><br><br>
+					<div style="float:left">
+						<img src="/images/kkangtong_home2.jpg" width="300">
+						<img src="/images/kkangtong_home3.jpg" width="300">
+						<img src="/images/kkangtong_home4.jpg" width="300">
+						<img src="/images/kkangtong_home6.jpg" width="300">
+						<img src="/images/kkangtong_home7.jpg" width="300">
+						<img src="/images/kkangtong_home8.jpg" width="300">
+						<img src="/images/kkangtong_home1.jpg" width="300">
+						<img src="/images/kkangtong_home5.jpg" width="300">
+						<img src="/images/kkangtong_home9.jpg" width="300">
+					</div>
+				</div>
+				<div class="tab-pane fade" id="store_list" role="tabpanel" aria-labelledby="store_list-tab">
+					<br><h2><strong>점포목록</strong></h2><br>
+				</div>
+				<div class="tab-pane fade" id="product_list" role="tabpanel" aria-labelledby="product_list-tab">
+					<br><h2><strong>품목목록</strong></h2><br>
+				</div>
+				<div class="tab-pane fade" id="direction" role="tabpanel" aria-labelledby="direction-tab">
+					<br><h2><strong>오시는길</strong></h2><br>
+					<div>
+						<div id="map" style="width:500px;height:450px;"></div>
+						<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=da146a2a6ff6a54903c1d2a7caecd1c7"></script>
+						<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=da146a2a6ff6a54903c1d2a7caecd1c7&libraries=services"></script>
+						<script>
+							var container = document.getElementById('map');
+							var options = {
+								center : new kakao.maps.LatLng(35.10209731168853, 129.02583596322543),
+								level : 7
+							};
+							var map = new kakao.maps.Map(container, options);
+							
+							var position = {
+									title: '부평깡통시장',
+									latlng: new kakao.maps.LatLng(35.10209731168853, 129.02583596322543),
+									url: 'market_detail?market=bupyeongkkangtong'
+								};
+							
+							var imageSrc = '/images/marker.png';
+							var imageSize = new kakao.maps.Size(64, 69); 
+							    
+						    // 마커 이미지를 생성합니다    
+						    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize); 
+						    
+						    // 마커를 생성합니다
+						    var marker = new kakao.maps.Marker({
+						        map: map, // 마커를 표시할 지도
+						        position: position.latlng, // 마커를 표시할 위치
+						        title : position.title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+						        image : markerImage // 마커 이미지 
+						    });
+						    var infowindow = new kakao.maps.InfoWindow({
+				        		content: position.title // 인포윈도우에 표시할 내용
+				    		});
+				    		
+						    kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+						    kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+							
+							function makeOverListener(map, marker, infowindow) {
+							    return function() {
+							        infowindow.open(map, marker);
+							    };
+							}
+							
+							function makeOutListener(infowindow) {
+							    return function() {
+							        infowindow.close();
+							    };
+							}
+						</script>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer class="container-fluid text-center" th:replace="common/footer"></footer>
+
+</body>
+</html>
